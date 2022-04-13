@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis配置文件-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<!--    <sql id="all">-->
+<!--        id,avatar,tag_name as tagName-->
+<!--    </sql>-->
+
+<!--    <select id="findTagsByArticleId" parameterType="long" resultType="com.mszlu.blog.dao.pojo.Tag">-->
+<!--        select <include refid="all" />  from ms_tag-->
+<!--        <where>-->
+<!--            id in-->
+<!--            (select tag_id from ms_article_tag where article_id = #{articleId})-->
+<!--        </where>-->
+<!--    </select>-->
+
+<mapper namespace="com.cpt202.leisure_town.dao.mapper.TagMapper">
+    <select id="findTagsByArticleId" parameterType="long" resultType="com.cpt202.leisure_town.dao.pojo.Tag">
+        select id,avatar,tag_name as tagName from ms_tag
+        where id in
+        (select tag_id from ms_article_tag where article_id =#{articleId})
+    </select>
+
+    <!--    List<Long> findHotsTagIds(int limit);-->
+    <select id="findHotsTagIds" parameterType="int" resultType="java.lang.Long">
+        select tag_id from ms_article_tag GROUP BY tag_id ORDER BY count(*) DESC LIMIT #{limit}
+    </select>
+    <!--    List<Tag> findTagsByTagIds(List<Long> tagIds);因为输入的类型是list所以parameterType的值是list-->
+    <select id="findTagsByTagIds" parameterType="list" resultType="com.cpt202.leisure_town.dao.pojo.Tag">
+        select id,tag_name as tagName from ms_tag
+        where id in
+        <foreach collection="tagIds" item="tagId" separator="," open="(" close=")">
+            #{tagId}
+        </foreach>
+    </select>
+
+</mapper>
