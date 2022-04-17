@@ -1,4 +1,5 @@
 <template>
+  <!--文章评论楼-->
   <div class="me-view-comment-item">
     <div class="me-view-comment-author">
       <a class="">
@@ -8,16 +9,13 @@
         <span class="me-view-nickname">{{comment.author.nickname}}</span>
         <div class="me-view-meta">
           <span>{{rootCommentCounts - index}}楼</span>
-          <span>{{comment.createDate | format}}</span>
+      <!--    <span>{{comment.createDate | format}}</span>-->
         </div>
       </div>
     </div>
     <div>
       <p class="me-view-comment-content">{{comment.content}}</p>
       <div class="me-view-comment-tools">
-        <!--<a class="me-view-comment-tool">-->
-        <!--<i class="el-icon-caret-top"></i> 20-->
-        <!--</a>-->
         <a class="me-view-comment-tool" @click="showComment(-1,comment.author)">
           <i class="me-icon-comment"></i>&nbsp; 评论
         </a>
@@ -34,15 +32,12 @@
           </div>
           <div class="me-view-meta">
             <span style="padding-right: 10px">{{c.createDate | format}}</span>
-          <!--  <a class="me-view-comment-tool" @click="showComment(c.id, c.author)">
-              <i class="me-icon-comment"></i>&nbsp;回复
-            </a> -->
           </div>
 
         </div>
 
+<!--文章评论框-->
         <div class="me-view-comment-write" v-show="commentShow">
-
           <el-input
             v-model="reply.content"
             type="input"

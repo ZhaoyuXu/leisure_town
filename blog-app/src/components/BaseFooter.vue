@@ -41,7 +41,7 @@
     line-height: 60px;
     font-family: 'garamond', sans-serif;
     font-size: 30px;
-    color:  rgb(25, 71, 41)
+    
 
   }
 

@@ -13,7 +13,8 @@
             <h3 class="me-ct-name">{{ct.categoryName}}</h3>
             <p>{{ct.description}}</p>
           </template>
-          <span class="me-ct-meta" style="font-size: 30px;color:rgb(25, 71, 41)">{{ct.articles}}文章分类</span>
+
+          <span class="me-ct-meta">{{ct.articles}} 文章</span>
         </div>
 
         <div class="me-ct-articles">
@@ -74,17 +75,17 @@
         }
 
       },
-      getCategoryDetail(id) {
+  /*    getCategoryDetail(id) {
         let that = this
-        getCategoryDetail(id).then(data => {
+       getCategoryDetail(id).then(data => {
           that.ct = data.data
         }).catch(error => {
           if (error !== 'error') {
             that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
           }
         })
-      },
-      getTagDetail(id) {
+      },*/
+  /*    getTagDetail(id) {
         let that = this
         getTagDetail(id).then(data => {
           that.ct = data.data
@@ -93,7 +94,7 @@
             that.$message({type: 'error', message: '小镇标签加载失败', showClose: true})
           }
         })
-      },
+      },*/
       getArticlesByCategory(id) {
         let that = this
         getArticlesByCategory(id).then(data => {
