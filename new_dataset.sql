@@ -1,142 +1,148 @@
-/*
- Navicat Premium Data Transfer
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: localhost    Database: new_schema
+-- ------------------------------------------------------
+-- Server version	8.0.23
 
- Source Server         : cpt202
- Source Server Type    : MySQL
- Source Server Version : 80028
- Source Host           : localhost:3306
- Source Schema         : new_schema
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
- Target Server Type    : MySQL
- Target Server Version : 80028
- File Encoding         : 65001
+--
+-- Table structure for table `ms_article`
+--
 
- Date: 12/04/2022 16:22:07
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for ms_article
--- ----------------------------
 DROP TABLE IF EXISTS `ms_article`;
-CREATE TABLE `ms_article`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_article` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `comment_counts` int NULL DEFAULT NULL COMMENT '评论数量',
-  `create_date` bigint NULL DEFAULT NULL COMMENT '创建时间',
-  `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '简介',
-  `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `view_counts` int NULL DEFAULT NULL COMMENT '浏览数量',
+  `comment_counts` int DEFAULT NULL COMMENT '评论数量',
+  `create_date` bigint DEFAULT NULL COMMENT '创建时间',
+  `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '简介',
+  `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
+  `view_counts` int DEFAULT NULL COMMENT '浏览数量',
   `weight` int NOT NULL COMMENT '是否置顶',
-  `author_id` bigint NULL DEFAULT NULL COMMENT '作者id',
-  `body_id` bigint NULL DEFAULT NULL COMMENT '内容id',
-  `category_id` bigint NULL DEFAULT NULL COMMENT '类别id',
+  `author_id` bigint DEFAULT NULL COMMENT '作者id',
+  `body_id` bigint DEFAULT NULL COMMENT '内容id',
+  `category_id` bigint DEFAULT NULL COMMENT '类别id',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `Category_id`(`category_id` ASC) USING BTREE,
-  INDEX `Body_id`(`body_id` ASC) USING BTREE,
-  INDEX `Authorid`(`author_id` ASC) USING BTREE,
-  CONSTRAINT `Category_id` FOREIGN KEY (`category_id`) REFERENCES `ms_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  KEY `Category_id` (`category_id`) USING BTREE,
+  KEY `Body_id` (`body_id`) USING BTREE,
+  KEY `Authorid` (`author_id`) USING BTREE,
+  CONSTRAINT `Authorid` FOREIGN KEY (`author_id`) REFERENCES `ms_sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Body_id` FOREIGN KEY (`body_id`) REFERENCES `ms_article_body` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Authorid` FOREIGN KEY (`author_id`) REFERENCES `ms_sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1513472944250642434 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `Category_id` FOREIGN KEY (`category_id`) REFERENCES `ms_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1516084926579511298 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_article
--- ----------------------------
-INSERT INTO `ms_article` VALUES (1, 11, 1621947720727, '通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\r\n\r\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。', 'springboot介绍以及入门案例', 125, 0, 1, 1, 2);
-INSERT INTO `ms_article` VALUES (9, 0, 1613947720727, 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。', 'Vue.js 到底是什么', 3, 0, 1, 20, 2);
-INSERT INTO `ms_article` VALUES (10, 0, 1523947720727, '本节将介绍如何在项目中使用 Element。', 'Element相关', 10, 0, 1, 21, 2);
-INSERT INTO `ms_article` VALUES (1405564731300831233, 0, 1623947720727, '66666666666', '666666666666666', 2, 0, 1, 1405564731351162882, 2);
-INSERT INTO `ms_article` VALUES (1405916999732707330, 0, 1624031708047, 'springboot入门案例', 'SpringBoot入门案例', 5, 0, 1, 1405916999854342146, 2);
-INSERT INTO `ms_article` VALUES (1513472944250642433, 0, 1649675043532, 'zxc', '123', 13, 0, 1513472880207814658, 1513472944250642435, 2);
-INSERT INTO `ms_article` VALUES (1513791630131900418, 0, 1649751024172, 'Cook', 'Food', 1, 0, 1513472880207814658, 1513791630131900420, 1);
-INSERT INTO `ms_article` VALUES (1513792195041755137, 0, 1649751158850, 'travel', 'Travel', 1, 0, 1513472880207814658, 1513792195041755139, 5);
+--
+-- Dumping data for table `ms_article`
+--
 
--- ----------------------------
--- Table structure for ms_article_body
--- ----------------------------
+LOCK TABLES `ms_article` WRITE;
+/*!40000 ALTER TABLE `ms_article` DISABLE KEYS */;
+INSERT INTO `ms_article` VALUES (1001,0,1649751219622,'Stories about Jay Chou.','Jay Chou',6,0,1,1001,4),(1002,0,1649675043532,'Travel to Paris.','Eiffel Tower',17,0,3,1002,5),(1003,0,1649751024172,'Delicious Pizza!!!','Pizza',4,0,3,1003,1),(1004,0,1649751113782,'MOBA!','League Of Legends',5,0,3,1004,2),(1005,1,1649751124172,'Know more about Taylor Swift.','Taylar Swift',5,0,1,1005,4),(1516084926579511297,0,1650297788662,'Introduction about DC heroes','Hero',1,0,1515966632388263938,1516084926642425858,4);
+/*!40000 ALTER TABLE `ms_article` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_article_body`
+--
+
 DROP TABLE IF EXISTS `ms_article_body`;
-CREATE TABLE `ms_article_body`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_article_body` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `content_html` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `content_html` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
   `article_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `article_id`(`article_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1513472944250642436 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+  KEY `article_id` (`article_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1516084926642425859 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_article_body
--- ----------------------------
-INSERT INTO `ms_article_body` VALUES (1, '# 1. Spring Boot介绍\r\n\r\n## 1.1 简介\r\n\r\n在您第1次接触和学习Spring框架的时候，是否因为其繁杂的配置而退却了？\r\n\r\n在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？\r\n\r\n那么您就不妨来试试使用Spring Boot来让你更易上手，更简单快捷地构建Spring应用！\r\n\r\nSpring Boot让我们的Spring应用变的更轻量化。\r\n\r\n我们不必像以前那样繁琐的构建项目、打包应用、部署到Tomcat等应用服务器中来运行我们的业务服务。\r\n\r\n通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\r\n\r\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。\r\n\r\n**总结一下Spring Boot的主要优点：**\r\n\r\n1. 为所有Spring开发者更快的入门\r\n2. 开箱即用，提供各种默认配置来简化项目配置\r\n3. 内嵌式容器简化Web项目\r\n4. 没有冗余代码生成和XML配置的要求\r\n5. 统一的依赖管理\r\n6. 自动装配，更易使用，更易扩展\r\n\r\n## 1.2 使用版本说明\r\n\r\nSpringboot版本：使用最新的2.5.0版本\r\n\r\n教程参考了官方文档进行制作，权威。\r\n\r\n其他依赖版本：\r\n\r\n	1. Maven  需求：3.5+\r\n\r\n   	2. JDK 需求  8+\r\n   	3. Spring Framework 5.3.7以上版本\r\n   	4. Tomcat 9.0\r\n   	5. Servlet版本 4.0  但是可以部署到Servlet到3.1+的容器中\r\n\r\n# 2. 快速入门\r\n\r\n快速的创建一个Spring Boot应用，并且实现一个简单的Http请求处理。通过这个例子对Spring Boot有一个初步的了解，并体验其结构简单、开发快速的特性。\r\n\r\n教程使用的Idea版本：2019.3\r\n\r\n## 2.1 创建基础项目\r\n\r\n**第一步：** 创建maven项目\r\n\r\npom.xml :\r\n\r\n~~~xml\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>com.xiaopizhu</groupId>\r\n    <artifactId>helloSpringBoot</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n	<!--springboot的父工程其中定义了常用的依赖，并且无依赖冲突-->\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>2.5.0</version>\r\n    </parent>\r\n</project>\r\n~~~\r\n\r\n注意上方的parent必须加，其中定义了springboot官方支持的n多依赖，基本上常用的已经有了，所以接下来导入依赖的时候，绝大部分都可以不加版本号。\r\n\r\n此时的工程结构为：\r\n\r\n![image-20210523173241557](img/image-20210523173241557.png)\r\n\r\n**第二步：** 添加web依赖\r\n\r\n~~~xml\r\n<dependencies>\r\n    <dependency>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-web</artifactId>\r\n    </dependency>\r\n</dependencies>\r\n~~~\r\n\r\n添加上方的web依赖，其中间接依赖了spring-web，spring-webmvc，spring-core等spring和springmvc的包，并且集成了tomcat。\r\n\r\n**第三步：** 编写启动类\r\n\r\n~~~java\r\npackage com.xiaopizhu.springboot;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\n\r\n@SpringBootApplication\r\npublic class HelloApp {\r\n\r\n    public static void main(String[] args) {\r\n        SpringApplication.run(HelloApp.class,args);\r\n    }\r\n}\r\n\r\n~~~\r\n\r\n@SpringBootApplication注解标识了HelloApp为启动类，也是Spring Boot的核心。\r\n\r\n**第四步：** 运行启动类的main方法\r\n\r\n![image-20210523173712142](img/image-20210523173712142.png)\r\n\r\n看到如上配置，证明启动成功，tomcat端口号默认为8080。\r\n\r\n**第五步：**  如果想要修改端口号，可以在resources目录下新建application.properties\r\n\r\n~~~properties\r\nserver.port=8082\r\n~~~\r\n\r\n**第六步：** 重新运行\r\n\r\n![image-20210523174011613](img/image-20210523174011613.png)\r\n\r\n此时的项目结构为：\r\n\r\n![image-20210523174032053](img/image-20210523174032053.png)\r\n\r\n**src/main/java :**  编写java代码，注意启动类需要放在项目的根包下。\r\n\r\n**src/main/resources:**  放置资源的目录，比如springboot的配置文件，静态文件，mybatis配置，日志配置等。\r\n\r\n**src/test/java:**  测试代码\r\n\r\n## 2.2 编写一个Http接口\r\n\r\n**第一步：**创建`HelloController`类，内容如下：\r\n\r\n~~~java\r\npackage com.xiaopizhu.springboot.controller;\r\n\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\n@RestController\r\n@RequestMapping(\"hello\")\r\npublic class HelloController {\r\n\r\n    @GetMapping(\"boot\")\r\n    public String hello(){\r\n        return \"hello spring boot\";\r\n    }\r\n\r\n}\r\n\r\n~~~\r\n\r\n**注意包名，必须在启动类所在的包名下。**\r\n\r\n**第二步：**重启程序，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\r\n\r\n得到结果：hello spring boot\r\n\r\n## 2.3 编写单元测试用例\r\n\r\n**第一步：**添加spring boot测试依赖\r\n\r\n~~~xml\r\n		<dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n~~~\r\n\r\n**第二步：**在src/test 下，编写测试用例\r\n\r\n~~~java\r\npackage com.xiaopizhu.springboot.controller;\r\n\r\nimport org.junit.jupiter.api.BeforeAll;\r\nimport org.junit.jupiter.api.BeforeEach;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.springframework.boot.test.context.SpringBootTest;\r\nimport org.springframework.http.MediaType;\r\nimport org.springframework.test.web.servlet.MockMvc;\r\nimport org.springframework.test.web.servlet.request.MockMvcRequestBuilders;\r\nimport org.springframework.test.web.servlet.setup.MockMvcBuilders;\r\n\r\nimport static org.hamcrest.Matchers.equalTo;\r\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;\r\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\r\n\r\n@SpringBootTest\r\npublic class TestHelloController {\r\n\r\n    private MockMvc mockMvc;\r\n\r\n    @BeforeEach\r\n    public void beforeEach(){\r\n        mockMvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();\r\n    }\r\n    @Test\r\n    public void testHello() throws Exception {\r\n        mockMvc.perform(MockMvcRequestBuilders.get(\"/hello/boot\")\r\n                .accept(MediaType.APPLICATION_JSON))\r\n                .andExpect(status().isOk())\r\n                .andExpect(content().string(equalTo(\"hello spring boot\")));\r\n    }\r\n}\r\n\r\n~~~\r\n\r\n上面的测试用例，是构建一个空的`WebApplicationContext`，并且在before中加载了HelloController，得以在测试用例中mock调用，模拟请求。\r\n\r\n## 2.4 打包为jar运行\r\n\r\n**第一步：**添加打包(maven构建springboot)插件\r\n\r\n~~~xml\r\n  <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n~~~\r\n\r\n在idea的右侧 maven中，使用package来打包程序，打包完成后，在target目录下生成helloSpringBoot-1.0-SNAPSHOT.jar\r\n\r\n![image-20210523181737720](img/image-20210523181737720.png)\r\n\r\n**第二步：**打开cmd：找到jar对应的目录\r\n\r\n输入命令\r\n\r\n~~~shell\r\njava -jar helloSpringBoot-1.0-SNAPSHOT.jar\r\n~~~\r\n\r\n![image-20210523182426404](img/image-20210523182426404.png)\r\n\r\n**第三步：**测试，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\r\n\r\n得到结果：hello spring boot\r\n\r\n## 2.5 查看jar包内容\r\n\r\n~~~shell\r\njar tvf helloSpringBoot-1.0-SNAPSHOT.jar\r\n~~~\r\n\r\n# 3. 小结\r\n\r\n1. 通过Maven构建了一个空白Spring Boot项目，再通过引入web模块实现了一个简单的请求处理。\r\n2. 通过修改配置文件，更改端口号\r\n3. 编写了测试用例\r\n4. 打包jar包运行\r\n\r\n', '<h2>2018-01-04</h2>\n<pre><code class=\"lang-\"># 使用vue的Webpack模板生成脚手架\n</code></pre>\n<h2>2018-01-05</h2>\n<pre><code class=\"lang-\"># 引入ElementUI\n\n# babel-plugin-component自定义主题\n# 首页\n# 登陆页\n# 注册页面\n# 日志页\n</code></pre>\n<h2>2018-01-07</h2>\n<pre><code class=\"lang-\"># 调整底部栏始终固定在底部\n# 日志页 添加时间轴\n# 首页的文章列表\n</code></pre>\n<h2>2018-01-08</h2>\n<pre><code class=\"lang-\"># 使用组件-博客作者tab页 \n# 添加第三方图标\n</code></pre>\n<h2>2018-01-09</h2>\n<pre><code class=\"lang-\"># 调整顶部导航栏：激活文字颜色，click点击\n# 组件-最新文章tab页\n\n# 最新文章、最热文章使用相同组件\n# 底部栏设计\n# 页面与两边边距改为100\n</code></pre>\n<h2>2018-01-10</h2>\n<pre><code class=\"lang-\"># 写博客 引入mavonEditor编辑器\n# 顶部导航栏都放入一个Menu中\n# 写文章页面\n#　mavonEditor局部引入\n\n#　页面的中间区域固定宽度，自动居中\n# 发布和取消\n# 发布dialog\n\n</code></pre>\n<h2>2018-01-11</h2>\n<pre><code class=\"lang-\"># 文章组件用守卫来改变body背景色\n# 调整登陆和注册页面，使其居中\n\n#子页面调整根元素为div\n#文章详情页\n\n</code></pre>\n<h2>2018-01-12</h2>\n<pre><code class=\"lang-\"># 文章详情页  内容  评论等\n\n</code></pre>\n<h2>2018-01-13</h2>\n<pre><code class=\"lang-\">## 重新调整页面结构	\n#顶部和底部 抽成  BaseHeader BaseFooter 组件\n#BlogView为单独页，以前是Home的子路由\n\n</code></pre>\n<h2>2018-01-15</h2>\n<pre><code class=\"lang-\"># 文章分类去掉子级\n# 将首页的文章列表抽成 ArticleItem组件\n# 增加文章的评论展示\n# 增加文章分类、标签页\n\n</code></pre>\n<h2>2018-01-15  2</h2>\n<pre><code class=\"lang-\"># 回到顶部去掉过渡动画（影响顶部导航栏）\n# 顶部导航栏 增加登录后菜单\n# 首页增加 最热标签\n# 增加 文章分类 标签的详情页\n# 将文章详情页、 文章分类标签页 改为Home的子路由（以前单独页）\n# Home组件增加路由判断：更正导航栏的状态、条件显示底部栏\n\n</code></pre>\n<h2>2018-01-16</h2>\n<pre><code class=\"lang-\"># 将写文章的顶部Header合并到BaseHeader中\n# 图片都放到了static目录下\n\n</code></pre>\n<h2>2018-01-24</h2>\n<pre><code class=\"lang-\"># 将自定义的theme放到assets下\n# 加入axios\n# 加入vuex\n# 实现登录\n# 实现退出\n\n</code></pre>\n<h2>2018-01-25</h2>\n<pre><code class=\"lang-\"># 实现注册逻辑\n# 写文章功能实现\n# 写文章时支持插入图片\n\n</code></pre>\n<h2>2018-01-26</h2>\n<pre><code class=\"lang-\"># 引入lodash工具类\n# 优化写文章的工具栏：滚动时固定顶部\n# 写文章 后台获取文章分类和标签\n\n# 首页的文章列表\n\n</code></pre>\n<h2>2018-01-27</h2>\n<pre><code class=\"lang-\"># 修改首页文章列表的样式\n# 首页加载文章功能\n# 文章查看功能\n# 文章分类和标签功能列表\n\n</code></pre>\n<h2>2018-01-28</h2>\n<pre><code class=\"lang-\"># 文章分类和标签详情\n\n</code></pre>\n<h2>2018-01-29</h2>\n<pre><code class=\"lang-\"># 文章分类和标签的文章数\n# 首页最热文章\n# 首页最新文章\n# 首页最热标签\n\n</code></pre>\n<h2>2018-01-30</h2>\n<pre><code class=\"lang-\"># BaseHeader放回views中\n# 修改Axios后置拦截，全局处理错误\n# 将登录 退出 和头像 放到一起\n\n</code></pre>\n', 1);
-INSERT INTO `ms_article_body` VALUES (20, 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。\n\n如果你想在深入学习 Vue 之前对它有更多了解，我们制作了一个视频，带您了解其核心概念和一个示例工程。\n如果你已经是有经验的前端开发者，想知道 Vue 与其它库/框架有哪些区别，请查看对比其它框架。\n\n# 起步\n\n> 官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识。如果你刚开始学习前端开发，将框架作为你的第一步可能不是最好的主意——掌握好基础知识再来吧！之前有其它框架的使用经验会有帮助，但这不是必需的。\n\n尝试 Vue.js 最简单的方法是使用 JSFiddle 上的 Hello World 例子。你可以在浏览器新标签页中打开它，跟着例子学习一些基础用法。或者你也可以创建一个 .html 文件，然后通过如下方式引入 Vue：\n\n```javascript\n<script src=\"https://cdn.jsdelivr.net/npm/vue\"></script>\n\n```\n安装教程给出了更多安装 Vue 的方式。请注意我们不推荐新手直接使用 vue-cli，尤其是在你还不熟悉基于 Node.js 的构建工具时。\n\n# 声明式渲染\nVue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统：\n```javascript\n<div id=\"app\">\n  {{ message }}\n</div>\n\n```\n```javascript\nvar app = new Vue({\n  el: \'#app\',\n  data: {\n    message: \'Hello Vue!\'\n  }\n})\n\n```\n我们已经成功创建了第一个 Vue 应用！看起来这跟渲染一个字符串模板非常类似，但是 Vue 在背后做了大量工作。现在数据和 DOM 已经被建立了关联，所有东西都是响应式的。我们要怎么确认呢？打开你的浏览器的 JavaScript 控制台 (就在这个页面打开)，并修改 app.message 的值，你将看到上例相应地更新。\n\n除了文本插值，我们还可以像这样来绑定元素特性：\n\n\n\n\n\n\n', '<p>Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。</p>\n<p>如果你想在深入学习 Vue 之前对它有更多了解，我们制作了一个视频，带您了解其核心概念和一个示例工程。<br />\n如果你已经是有经验的前端开发者，想知道 Vue 与其它库/框架有哪些区别，请查看对比其它框架。</p>\n<h1>起步</h1>\n<blockquote>\n<p>官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识。如果你刚开始学习前端开发，将框架作为你的第一步可能不是最好的主意——掌握好基础知识再来吧！之前有其它框架的使用经验会有帮助，但这不是必需的。</p>\n</blockquote>\n<p>尝试 Vue.js 最简单的方法是使用 JSFiddle 上的 Hello World 例子。你可以在浏览器新标签页中打开它，跟着例子学习一些基础用法。或者你也可以创建一个 .html 文件，然后通过如下方式引入 Vue：</p>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\">&lt;script src=<span class=\"hljs-string\">\"https://cdn.jsdelivr.net/npm/vue\"</span>&gt;<span class=\"xml\"><span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">script</span>&gt;</span></span>\n\n</code></div></pre>\n<p>安装教程给出了更多安装 Vue 的方式。请注意我们不推荐新手直接使用 vue-cli，尤其是在你还不熟悉基于 Node.js 的构建工具时。</p>\n<h1>声明式渲染</h1>\n<p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统：</p>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\">&lt;div id=<span class=\"hljs-string\">\"app\"</span>&gt;\n  {{ message }}\n&lt;<span class=\"hljs-regexp\">/div&gt;\n\n</span></code></div></pre>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\"><span class=\"hljs-keyword\">var</span> app = <span class=\"hljs-keyword\">new</span> Vue({\n  <span class=\"hljs-attr\">el</span>: <span class=\"hljs-string\">\'#app\'</span>,\n  <span class=\"hljs-attr\">data</span>: {\n    <span class=\"hljs-attr\">message</span>: <span class=\"hljs-string\">\'Hello Vue!\'</span>\n  }\n})\n\n</code></div></pre>\n<p>我们已经成功创建了第一个 Vue 应用！看起来这跟渲染一个字符串模板非常类似，但是 Vue 在背后做了大量工作。现在数据和 DOM 已经被建立了关联，所有东西都是响应式的。我们要怎么确认呢？打开你的浏览器的 JavaScript 控制台 (就在这个页面打开)，并修改 app.message 的值，你将看到上例相应地更新。</p>\n<p>除了文本插值，我们还可以像这样来绑定元素特性：</p>\n', 9);
-INSERT INTO `ms_article_body` VALUES (21, '## 快速上手\n\n本节将介绍如何在项目中使用 Element。\n\n### 使用 Starter Kit\n我们提供了通用的项目模板，你可以直接使用。对于 Laravel 用户，我们也准备了相应的模板，同样可以直接下载使用。\n\n如果不希望使用我们提供的模板，请继续阅读。\n\n### 使用 vue-cli\n\n我们还可以使用 vue-cli 初始化项目，命令如下：\n\n```language\n> npm i -g vue-cli\n> mkdir my-project && cd my-project\n> vue init webpack\n> npm i && npm i element-ui\n```\n\n### 引入 Element\n你可以引入整个 Element，或是根据需要仅引入部分组件。我们先介绍如何引入完整的 Element。\n\n#### 完整引入\n在 main.js 中写入以下内容：\n```javascript\nimport Vue from \'vue\'\nimport ElementUI from \'element-ui\'\nimport \'element-ui/lib/theme-chalk/index.css\'\nimport App from \'./App.vue\'\n\nVue.use(ElementUI)\n\nnew Vue({\n  el: \'#app\',\n  render: h => h(App)\n})\n\n```\n以上代码便完成了 Element 的引入。需要注意的是，样式文件需要单独引入。\n\n#### 按需引入\n借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。\n\n首先，安装 babel-plugin-component：\n\n', '<h2>快速上手</h2>\n<p>本节将介绍如何在项目中使用 Element。</p>\n<h3>使用 Starter Kit</h3>\n<p>我们提供了通用的项目模板，你可以直接使用。对于 Laravel 用户，我们也准备了相应的模板，同样可以直接下载使用。</p>\n<p>如果不希望使用我们提供的模板，请继续阅读。</p>\n<h3>使用 vue-cli</h3>\n<p>我们还可以使用 vue-cli 初始化项目，命令如下：</p>\n<pre><code class=\"lang-language\">&gt; npm i -g vue-cli\n&gt; mkdir my-project &amp;&amp; cd my-project\n&gt; vue init webpack\n&gt; npm i &amp;&amp; npm i element-ui\n</code></pre>\n<h3>引入 Element</h3>\n<p>你可以引入整个 Element，或是根据需要仅引入部分组件。我们先介绍如何引入完整的 Element。</p>\n<h4>完整引入</h4>\n<p>在 main.js 中写入以下内容：</p>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\"><span class=\"hljs-keyword\">import</span> Vue <span class=\"hljs-keyword\">from</span> <span class=\"hljs-string\">\'vue\'</span>\n<span class=\"hljs-keyword\">import</span> ElementUI <span class=\"hljs-keyword\">from</span> <span class=\"hljs-string\">\'element-ui\'</span>\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-string\">\'element-ui/lib/theme-chalk/index.css\'</span>\n<span class=\"hljs-keyword\">import</span> App <span class=\"hljs-keyword\">from</span> <span class=\"hljs-string\">\'./App.vue\'</span>\n\nVue.use(ElementUI)\n\n<span class=\"hljs-keyword\">new</span> Vue({\n  <span class=\"hljs-attr\">el</span>: <span class=\"hljs-string\">\'#app\'</span>,\n  <span class=\"hljs-attr\">render</span>: <span class=\"hljs-function\"><span class=\"hljs-params\">h</span> =&gt;</span> h(App)\n})\n\n</code></div></pre>\n<p>以上代码便完成了 Element 的引入。需要注意的是，样式文件需要单独引入。</p>\n<h4>按需引入</h4>\n<p>借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。</p>\n<p>首先，安装 babel-plugin-component：</p>\n', 10);
-INSERT INTO `ms_article_body` VALUES (1405564731351162882, '666666666666', '<p>666666666666</p>\n', 1405564731300831233);
-INSERT INTO `ms_article_body` VALUES (1405909844828909569, '# 1. Spring Boot介绍\n\n## 1.1 简介\n\n在您第1次接触和学习Spring框架的时候，是否因为其繁杂的配置而退却了？\n\n在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？\n\n那么您就不妨来试试使用Spring Boot来让你更易上手，更简单快捷地构建Spring应用！\n\nSpring Boot让我们的Spring应用变的更轻量化。\n\n我们不必像以前那样繁琐的构建项目、打包应用、部署到Tomcat等应用服务器中来运行我们的业务服务。\n\n通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\n\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。\n\n**总结一下Spring Boot的主要优点：**\n\n1. 为所有Spring开发者更快的入门\n2. 开箱即用，提供各种默认配置来简化项目配置\n3. 内嵌式容器简化Web项目\n4. 没有冗余代码生成和XML配置的要求\n5. 统一的依赖管理\n6. 自动装配，更易使用，更易扩展\n\n## 1.2 使用版本说明\n\nSpringboot版本：使用最新的2.5.0版本\n\n教程参考了官方文档进行制作，权威。\n\n其他依赖版本：\n\n	1. Maven  需求：3.5+\n\n   	2. JDK 需求  8+\n   	3. Spring Framework 5.3.7以上版本\n   	4. Tomcat 9.0\n   	5. Servlet版本 4.0  但是可以部署到Servlet到3.1+的容器中\n\n# 2. 快速入门\n\n快速的创建一个Spring Boot应用，并且实现一个简单的Http请求处理。通过这个例子对Spring Boot有一个初步的了解，并体验其结构简单、开发快速的特性。\n\n教程使用的Idea版本：2019.3\n\n## 2.1 创建基础项目\n\n**第一步：** 创建maven项目\n\npom.xml :\n\n~~~xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>com.xiaopizhu</groupId>\n    <artifactId>helloSpringBoot</artifactId>\n    <version>1.0-SNAPSHOT</version>\n	<!--springboot的父工程其中定义了常用的依赖，并且无依赖冲突-->\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>2.5.0</version>\n    </parent>\n</project>\n~~~\n\n注意上方的parent必须加，其中定义了springboot官方支持的n多依赖，基本上常用的已经有了，所以接下来导入依赖的时候，绝大部分都可以不加版本号。\n\n此时的工程结构为：\n\n![image20210523173241557.png](https://static.mszlu.com/6fc39758-0db2-431d-9f94-a705aa2c7e59.png)\n\n**第二步：** 添加web依赖\n\n~~~xml\n<dependencies>\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-web</artifactId>\n    </dependency>\n</dependencies>\n~~~\n\n添加上方的web依赖，其中间接依赖了spring-web，spring-webmvc，spring-core等spring和springmvc的包，并且集成了tomcat。\n\n**第三步：** 编写启动类\n\n~~~java\npackage com.xiaopizhu.springboot;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class HelloApp {\n\n    public static void main(String[] args) {\n        SpringApplication.run(HelloApp.class,args);\n    }\n}\n\n~~~\n\n@SpringBootApplication注解标识了HelloApp为启动类，也是Spring Boot的核心。\n\n**第四步：** 运行启动类的main方法\n\n![image-20210523173712142](img/image-20210523173712142.png)\n\n看到如上配置，证明启动成功，tomcat端口号默认为8080。\n\n**第五步：**  如果想要修改端口号，可以在resources目录下新建application.properties\n\n~~~properties\nserver.port=8082\n~~~\n\n**第六步：** 重新运行\n\n![image-20210523174011613](img/image-20210523174011613.png)\n\n此时的项目结构为：\n\n![image-20210523174032053](img/image-20210523174032053.png)\n\n**src/main/java :**  编写java代码，注意启动类需要放在项目的根包下。\n\n**src/main/resources:**  放置资源的目录，比如springboot的配置文件，静态文件，mybatis配置，日志配置等。\n\n**src/test/java:**  测试代码\n\n## 2.2 编写一个Http接口\n\n**第一步：**  创建`HelloController`类，内容如下：\n\n~~~java\npackage com.xiaopizhu.springboot.controller;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"hello\")\npublic class HelloController {\n\n    @GetMapping(\"boot\")\n    public String hello(){\n        return \"hello spring boot\";\n    }\n\n}\n\n~~~\n\n**注意包名，必须在启动类所在的包名下。**\n\n**第二步： ** 重启程序，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\n\n得到结果：hello spring boot\n\n## 2.3 编写单元测试用例\n\n**第一步： ** 添加spring boot测试依赖\n\n~~~xml\n		<dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n~~~\n\n**第二步：** 在src/test 下，编写测试用例\n\n~~~java\npackage com.xiaopizhu.springboot.controller;\n\nimport org.junit.jupiter.api.BeforeAll;\nimport org.junit.jupiter.api.BeforeEach;\nimport org.junit.jupiter.api.Test;\nimport org.springframework.boot.test.context.SpringBootTest;\nimport org.springframework.http.MediaType;\nimport org.springframework.test.web.servlet.MockMvc;\nimport org.springframework.test.web.servlet.request.MockMvcRequestBuilders;\nimport org.springframework.test.web.servlet.setup.MockMvcBuilders;\n\nimport static org.hamcrest.Matchers.equalTo;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\n\n@SpringBootTest\npublic class TestHelloController {\n\n    private MockMvc mockMvc;\n\n    @BeforeEach\n    public void beforeEach(){\n        mockMvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();\n    }\n    @Test\n    public void testHello() throws Exception {\n        mockMvc.perform(MockMvcRequestBuilders.get(\"/hello/boot\")\n                .accept(MediaType.APPLICATION_JSON))\n                .andExpect(status().isOk())\n                .andExpect(content().string(equalTo(\"hello spring boot\")));\n    }\n}\n\n~~~\n\n上面的测试用例，是构建一个空的`WebApplicationContext`，并且在before中加载了HelloController，得以在测试用例中mock调用，模拟请求。\n\n## 2.4 打包为jar运行\n\n**第一步：** 添加打包(maven构建springboot)插件\n\n~~~xml\n  <build>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n~~~\n\n在idea的右侧 maven中，使用package来打包程序，打包完成后，在target目录下生成helloSpringBoot-1.0-SNAPSHOT.jar\n\n![image-20210523181737720](img/image-20210523181737720.png)\n\n**第二步： ** 打开cmd：找到jar对应的目录\n\n输入命令\n\n~~~shell\njava -jar helloSpringBoot-1.0-SNAPSHOT.jar\n~~~\n\n![image-20210523182426404](img/image-20210523182426404.png)\n\n**第三步：**  测试，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\n\n得到结果：hello spring boot\n\n## 2.5 查看jar包内容\n\n~~~shell\njar tvf helloSpringBoot-1.0-SNAPSHOT.jar\n~~~\n\n# 3. 小结\n\n1. 通过Maven构建了一个空白Spring Boot项目，再通过引入web模块实现了一个简单的请求处理。\n2. 通过修改配置文件，更改端口号\n3. 编写了测试用例\n4. 打包jar包运行\n\n', '<h1><a id=\"1_Spring_Boot_0\"></a>1. Spring Boot介绍</h1>\n<h2><a id=\"11__2\"></a>1.1 简介</h2>\n<p>在您第1次接触和学习Spring框架的时候，是否因为其繁杂的配置而退却了？</p>\n<p>在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？</p>\n<p>那么您就不妨来试试使用Spring Boot来让你更易上手，更简单快捷地构建Spring应用！</p>\n<p>Spring Boot让我们的Spring应用变的更轻量化。</p>\n<p>我们不必像以前那样繁琐的构建项目、打包应用、部署到Tomcat等应用服务器中来运行我们的业务服务。</p>\n<p>通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过<code>java -jar</code>命令就可以运行起来。</p>\n<p>这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。</p>\n<p><strong>总结一下Spring Boot的主要优点：</strong></p>\n<ol>\n<li>为所有Spring开发者更快的入门</li>\n<li>开箱即用，提供各种默认配置来简化项目配置</li>\n<li>内嵌式容器简化Web项目</li>\n<li>没有冗余代码生成和XML配置的要求</li>\n<li>统一的依赖管理</li>\n<li>自动装配，更易使用，更易扩展</li>\n</ol>\n<h2><a id=\"12__27\"></a>1.2 使用版本说明</h2>\n<p>Springboot版本：使用最新的2.5.0版本</p>\n<p>教程参考了官方文档进行制作，权威。</p>\n<p>其他依赖版本：</p>\n<pre><code>1. Maven  需求：3.5+\n\n2. JDK 需求  8+\n3. Spring Framework 5.3.7以上版本\n4. Tomcat 9.0\n5. Servlet版本 4.0  但是可以部署到Servlet到3.1+的容器中\n</code></pre>\n<h1><a id=\"2__42\"></a>2. 快速入门</h1>\n<p>快速的创建一个Spring Boot应用，并且实现一个简单的Http请求处理。通过这个例子对Spring Boot有一个初步的了解，并体验其结构简单、开发快速的特性。</p>\n<p>教程使用的Idea版本：2019.3</p>\n<h2><a id=\"21__48\"></a>2.1 创建基础项目</h2>\n<p><strong>第一步：</strong> 创建maven项目</p>\n<p>pom.xml :</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\"><span class=\"php\"><span class=\"hljs-meta\">&lt;?</span>xml version=<span class=\"hljs-string\">\"1.0\"</span> encoding=<span class=\"hljs-string\">\"UTF-8\"</span><span class=\"hljs-meta\">?&gt;</span></span>\n<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">project</span> <span class=\"hljs-attr\">xmlns</span>=<span class=\"hljs-string\">\"http://maven.apache.org/POM/4.0.0\"</span>\n         <span class=\"hljs-attr\">xmlns:xsi</span>=<span class=\"hljs-string\">\"http://www.w3.org/2001/XMLSchema-instance\"</span>\n         <span class=\"hljs-attr\">xsi:schemaLocation</span>=<span class=\"hljs-string\">\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\"</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">modelVersion</span>&gt;</span>4.0.0<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">modelVersion</span>&gt;</span>\n\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>com.xiaopizhu<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>helloSpringBoot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">version</span>&gt;</span>1.0-SNAPSHOT<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">version</span>&gt;</span>\n	<span class=\"hljs-comment\">&lt;!--springboot的父工程其中定义了常用的依赖，并且无依赖冲突--&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">parent</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-parent<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">version</span>&gt;</span>2.5.0<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">version</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">parent</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">project</span>&gt;</span>\n</code></div></pre>\n<p>注意上方的parent必须加，其中定义了springboot官方支持的n多依赖，基本上常用的已经有了，所以接下来导入依赖的时候，绝大部分都可以不加版本号。</p>\n<p>此时的工程结构为：</p>\n<p><img src=\"https://static.mszlu.com/6fc39758-0db2-431d-9f94-a705aa2c7e59.png\" alt=\"image20210523173241557.png\" /></p>\n<p><strong>第二步：</strong> 添加web依赖</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependencies</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependency</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-web<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependency</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependencies</span>&gt;</span>\n</code></div></pre>\n<p>添加上方的web依赖，其中间接依赖了spring-web，spring-webmvc，spring-core等spring和springmvc的包，并且集成了tomcat。</p>\n<p><strong>第三步：</strong> 编写启动类</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot;\n\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.SpringApplication;\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;\n\n<span class=\"hljs-meta\">@SpringBootApplication</span>\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">HelloApp</span> </span>{\n\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">static</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">main</span><span class=\"hljs-params\">(String[] args)</span> </span>{\n        SpringApplication.run(HelloApp.class,args);\n    }\n}\n\n</code></div></pre>\n<p>@SpringBootApplication注解标识了HelloApp为启动类，也是Spring Boot的核心。</p>\n<p><strong>第四步：</strong> 运行启动类的main方法</p>\n<p><img src=\"img/image-20210523173712142.png\" alt=\"image-20210523173712142\" /></p>\n<p>看到如上配置，证明启动成功，tomcat端口号默认为8080。</p>\n<p><strong>第五步：</strong>  如果想要修改端口号，可以在resources目录下新建application.properties</p>\n<pre><code class=\"lang-properties\">server.port=8082\n</code></pre>\n<p><strong>第六步：</strong> 重新运行</p>\n<p><img src=\"img/image-20210523174011613.png\" alt=\"image-20210523174011613\" /></p>\n<p>此时的项目结构为：</p>\n<p><img src=\"img/image-20210523174032053.png\" alt=\"image-20210523174032053\" /></p>\n<p><strong>src/main/java :</strong>  编写java代码，注意启动类需要放在项目的根包下。</p>\n<p><strong>src/main/resources:</strong>  放置资源的目录，比如springboot的配置文件，静态文件，mybatis配置，日志配置等。</p>\n<p><strong>src/test/java:</strong>  测试代码</p>\n<h2><a id=\"22_Http_138\"></a>2.2 编写一个Http接口</h2>\n<p><strong>第一步：</strong>  创建<code>HelloController</code>类，内容如下：</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot.controller;\n\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.GetMapping;\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.RequestMapping;\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.RestController;\n\n<span class=\"hljs-meta\">@RestController</span>\n<span class=\"hljs-meta\">@RequestMapping</span>(<span class=\"hljs-string\">\"hello\"</span>)\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">HelloController</span> </span>{\n\n    <span class=\"hljs-meta\">@GetMapping</span>(<span class=\"hljs-string\">\"boot\"</span>)\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> String <span class=\"hljs-title\">hello</span><span class=\"hljs-params\">()</span></span>{\n        <span class=\"hljs-keyword\">return</span> <span class=\"hljs-string\">\"hello spring boot\"</span>;\n    }\n\n}\n\n</code></div></pre>\n<p><strong>注意包名，必须在启动类所在的包名下。</strong></p>\n<p>**第二步： ** 重启程序，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot</p>\n<p>得到结果：hello spring boot</p>\n<h2><a id=\"23__168\"></a>2.3 编写单元测试用例</h2>\n<p>**第一步： ** 添加spring boot测试依赖</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\">		<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependency</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-test<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">scope</span>&gt;</span>test<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">scope</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependency</span>&gt;</span>\n</code></div></pre>\n<p><strong>第二步：</strong> 在src/test 下，编写测试用例</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot.controller;\n\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.BeforeAll;\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.BeforeEach;\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.Test;\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.test.context.SpringBootTest;\n<span class=\"hljs-keyword\">import</span> org.springframework.http.MediaType;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.MockMvc;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders;\n\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.hamcrest.Matchers.equalTo;\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\n\n<span class=\"hljs-meta\">@SpringBootTest</span>\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">TestHelloController</span> </span>{\n\n    <span class=\"hljs-keyword\">private</span> MockMvc mockMvc;\n\n    <span class=\"hljs-meta\">@BeforeEach</span>\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">beforeEach</span><span class=\"hljs-params\">()</span></span>{\n        mockMvc = MockMvcBuilders.standaloneSetup(<span class=\"hljs-keyword\">new</span> HelloController()).build();\n    }\n    <span class=\"hljs-meta\">@Test</span>\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">testHello</span><span class=\"hljs-params\">()</span> <span class=\"hljs-keyword\">throws</span> Exception </span>{\n        mockMvc.perform(MockMvcRequestBuilders.get(<span class=\"hljs-string\">\"/hello/boot\"</span>)\n                .accept(MediaType.APPLICATION_JSON))\n                .andExpect(status().isOk())\n                .andExpect(content().string(equalTo(<span class=\"hljs-string\">\"hello spring boot\"</span>)));\n    }\n}\n\n</code></div></pre>\n<p>上面的测试用例，是构建一个空的<code>WebApplicationContext</code>，并且在before中加载了HelloController，得以在测试用例中mock调用，模拟请求。</p>\n<h2><a id=\"24_jar_220\"></a>2.4 打包为jar运行</h2>\n<p><strong>第一步：</strong> 添加打包(maven构建springboot)插件</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\">  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">build</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">plugins</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">plugin</span>&gt;</span>\n                <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n                <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">plugin</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">plugins</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">build</span>&gt;</span>\n</code></div></pre>\n<p>在idea的右侧 maven中，使用package来打包程序，打包完成后，在target目录下生成helloSpringBoot-1.0-SNAPSHOT.jar</p>\n<p><img src=\"img/image-20210523181737720.png\" alt=\"image-20210523181737720\" /></p>\n<p>**第二步： ** 打开cmd：找到jar对应的目录</p>\n<p>输入命令</p>\n<pre><div class=\"hljs\"><code class=\"lang-shell\">java -jar helloSpringBoot-1.0-SNAPSHOT.jar\n</code></div></pre>\n<p><img src=\"img/image-20210523182426404.png\" alt=\"image-20210523182426404\" /></p>\n<p><strong>第三步：</strong>  测试，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot</p>\n<p>得到结果：hello spring boot</p>\n<h2><a id=\"25_jar_253\"></a>2.5 查看jar包内容</h2>\n<pre><div class=\"hljs\"><code class=\"lang-shell\">jar tvf helloSpringBoot-1.0-SNAPSHOT.jar\n</code></div></pre>\n<h1><a id=\"3__259\"></a>3. 小结</h1>\n<ol>\n<li>通过Maven构建了一个空白Spring Boot项目，再通过引入web模块实现了一个简单的请求处理。</li>\n<li>通过修改配置文件，更改端口号</li>\n<li>编写了测试用例</li>\n<li>打包jar包运行</li>\n</ol>\n', 1405909844724051969);
-INSERT INTO `ms_article_body` VALUES (1405916999854342146, '# 1. Spring Boot介绍\n\n## 1.1 简介\n\n在您第1次接触和学习Spring框架的时候，是否因为其繁杂的配置而退却了？\n\n在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？\n\n那么您就不妨来试试使用Spring Boot来让你更易上手，更简单快捷地构建Spring应用！\n\nSpring Boot让我们的Spring应用变的更轻量化。\n\n我们不必像以前那样繁琐的构建项目、打包应用、部署到Tomcat等应用服务器中来运行我们的业务服务。\n\n通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\n\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。\n\n**总结一下Spring Boot的主要优点：**\n\n1. 为所有Spring开发者更快的入门\n2. 开箱即用，提供各种默认配置来简化项目配置\n3. 内嵌式容器简化Web项目\n4. 没有冗余代码生成和XML配置的要求\n5. 统一的依赖管理\n6. 自动装配，更易使用，更易扩展\n\n## 1.2 使用版本说明\n\nSpringboot版本：使用最新的2.5.0版本\n\n教程参考了官方文档进行制作，权威。\n\n其他依赖版本：\n\n	1. Maven  需求：3.5+\n\n   	2. JDK 需求  8+\n   	3. Spring Framework 5.3.7以上版本\n   	4. Tomcat 9.0\n   	5. Servlet版本 4.0  但是可以部署到Servlet到3.1+的容器中\n\n# 2. 快速入门\n\n快速的创建一个Spring Boot应用，并且实现一个简单的Http请求处理。通过这个例子对Spring Boot有一个初步的了解，并体验其结构简单、开发快速的特性。\n\n教程使用的Idea版本：2019.3\n\n## 2.1 创建基础项目\n\n**第一步：** 创建maven项目\n\npom.xml :\n\n~~~xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>com.xiaopizhu</groupId>\n    <artifactId>helloSpringBoot</artifactId>\n    <version>1.0-SNAPSHOT</version>\n	<!--springboot的父工程其中定义了常用的依赖，并且无依赖冲突-->\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>2.5.0</version>\n    </parent>\n</project>\n~~~\n\n注意上方的parent必须加，其中定义了springboot官方支持的n多依赖，基本上常用的已经有了，所以接下来导入依赖的时候，绝大部分都可以不加版本号。\n\n此时的工程结构为：\n\n![image20210523173241557.png](https://static.mszlu.com/a7302c88-e106-46ad-9713-dc9a6d523957.png)\n\n**第二步：** 添加web依赖\n\n~~~xml\n<dependencies>\n    <dependency>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-web</artifactId>\n    </dependency>\n</dependencies>\n~~~\n\n添加上方的web依赖，其中间接依赖了spring-web，spring-webmvc，spring-core等spring和springmvc的包，并且集成了tomcat。\n\n**第三步：** 编写启动类\n\n~~~java\npackage com.xiaopizhu.springboot;\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class HelloApp {\n\n    public static void main(String[] args) {\n        SpringApplication.run(HelloApp.class,args);\n    }\n}\n\n~~~\n\n@SpringBootApplication注解标识了HelloApp为启动类，也是Spring Boot的核心。\n\n**第四步：** 运行启动类的main方法\n\n![image20210523173712142.png](https://static.mszlu.com/dc17b43e-08df-46b0-bb7a-eb73044de7da.png)\n\n看到如上配置，证明启动成功，tomcat端口号默认为8080。\n\n**第五步：**  如果想要修改端口号，可以在resources目录下新建application.properties\n\n~~~properties\nserver.port=8082\n~~~\n\n**第六步：** 重新运行\n\n![image20210523174011613.png](https://static.mszlu.com/318e4b7e-95d2-4e43-a18f-279ea6ff9495.png)\n\n此时的项目结构为：\n\n![image20210523174032053.png](https://static.mszlu.com/756e4ae0-c4c7-43a5-9b5d-bc7ce974a942.png)\n\n**src/main/java :**  编写java代码，注意启动类需要放在项目的根包下。\n\n**src/main/resources:**  放置资源的目录，比如springboot的配置文件，静态文件，mybatis配置，日志配置等。\n\n**src/test/java:**  测试代码\n\n## 2.2 编写一个Http接口\n\n**第一步：**  创建`HelloController`类，内容如下：\n\n~~~java\npackage com.xiaopizhu.springboot.controller;\n\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"hello\")\npublic class HelloController {\n\n    @GetMapping(\"boot\")\n    public String hello(){\n        return \"hello spring boot\";\n    }\n\n}\n\n~~~\n\n**注意包名，必须在启动类所在的包名下。**\n\n**第二步： ** 重启程序，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\n\n得到结果：hello spring boot\n\n## 2.3 编写单元测试用例\n\n**第一步： ** 添加spring boot测试依赖\n\n~~~xml\n		<dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n~~~\n\n**第二步：** 在src/test 下，编写测试用例\n\n~~~java\npackage com.xiaopizhu.springboot.controller;\n\nimport org.junit.jupiter.api.BeforeAll;\nimport org.junit.jupiter.api.BeforeEach;\nimport org.junit.jupiter.api.Test;\nimport org.springframework.boot.test.context.SpringBootTest;\nimport org.springframework.http.MediaType;\nimport org.springframework.test.web.servlet.MockMvc;\nimport org.springframework.test.web.servlet.request.MockMvcRequestBuilders;\nimport org.springframework.test.web.servlet.setup.MockMvcBuilders;\n\nimport static org.hamcrest.Matchers.equalTo;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;\nimport static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\n\n@SpringBootTest\npublic class TestHelloController {\n\n    private MockMvc mockMvc;\n\n    @BeforeEach\n    public void beforeEach(){\n        mockMvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();\n    }\n    @Test\n    public void testHello() throws Exception {\n        mockMvc.perform(MockMvcRequestBuilders.get(\"/hello/boot\")\n                .accept(MediaType.APPLICATION_JSON))\n                .andExpect(status().isOk())\n                .andExpect(content().string(equalTo(\"hello spring boot\")));\n    }\n}\n\n~~~\n\n上面的测试用例，是构建一个空的`WebApplicationContext`，并且在before中加载了HelloController，得以在测试用例中mock调用，模拟请求。\n\n## 2.4 打包为jar运行\n\n**第一步：** 添加打包(maven构建springboot)插件\n\n~~~xml\n  <build>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n~~~\n\n在idea的右侧 maven中，使用package来打包程序，打包完成后，在target目录下生成helloSpringBoot-1.0-SNAPSHOT.jar\n\n![image20210523181737720.png](https://static.mszlu.com/45aa0db2-598f-4564-964c-a2d889dfbafe.png)\n\n**第二步： ** 打开cmd：找到jar对应的目录\n\n输入命令\n\n~~~shell\njava -jar helloSpringBoot-1.0-SNAPSHOT.jar\n~~~\n\n![image20210523182426404.png](https://static.mszlu.com/74376f77-b8eb-4c2c-a4cc-d3bfe24901e3.png)\n\n**第三步：**  测试，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot\n\n得到结果：hello spring boot\n\n## 2.5 查看jar包内容\n\n~~~shell\njar tvf helloSpringBoot-1.0-SNAPSHOT.jar\n~~~\n\n# 3. 小结\n\n1. 通过Maven构建了一个空白Spring Boot项目，再通过引入web模块实现了一个简单的请求处理。\n2. 通过修改配置文件，更改端口号\n3. 编写了测试用例\n4. 打包jar包运行\n\n', '<h1><a id=\"1_Spring_Boot_0\"></a>1. Spring Boot介绍</h1>\n<h2><a id=\"11__2\"></a>1.1 简介</h2>\n<p>在您第1次接触和学习Spring框架的时候，是否因为其繁杂的配置而退却了？</p>\n<p>在你第n次使用Spring框架的时候，是否觉得一堆反复黏贴的配置有一些厌烦？</p>\n<p>那么您就不妨来试试使用Spring Boot来让你更易上手，更简单快捷地构建Spring应用！</p>\n<p>Spring Boot让我们的Spring应用变的更轻量化。</p>\n<p>我们不必像以前那样繁琐的构建项目、打包应用、部署到Tomcat等应用服务器中来运行我们的业务服务。</p>\n<p>通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过<code>java -jar</code>命令就可以运行起来。</p>\n<p>这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。</p>\n<p><strong>总结一下Spring Boot的主要优点：</strong></p>\n<ol>\n<li>为所有Spring开发者更快的入门</li>\n<li>开箱即用，提供各种默认配置来简化项目配置</li>\n<li>内嵌式容器简化Web项目</li>\n<li>没有冗余代码生成和XML配置的要求</li>\n<li>统一的依赖管理</li>\n<li>自动装配，更易使用，更易扩展</li>\n</ol>\n<h2><a id=\"12__27\"></a>1.2 使用版本说明</h2>\n<p>Springboot版本：使用最新的2.5.0版本</p>\n<p>教程参考了官方文档进行制作，权威。</p>\n<p>其他依赖版本：</p>\n<pre><code>1. Maven  需求：3.5+\n\n2. JDK 需求  8+\n3. Spring Framework 5.3.7以上版本\n4. Tomcat 9.0\n5. Servlet版本 4.0  但是可以部署到Servlet到3.1+的容器中\n</code></pre>\n<h1><a id=\"2__42\"></a>2. 快速入门</h1>\n<p>快速的创建一个Spring Boot应用，并且实现一个简单的Http请求处理。通过这个例子对Spring Boot有一个初步的了解，并体验其结构简单、开发快速的特性。</p>\n<p>教程使用的Idea版本：2019.3</p>\n<h2><a id=\"21__48\"></a>2.1 创建基础项目</h2>\n<p><strong>第一步：</strong> 创建maven项目</p>\n<p>pom.xml :</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\"><span class=\"php\"><span class=\"hljs-meta\">&lt;?</span>xml version=<span class=\"hljs-string\">\"1.0\"</span> encoding=<span class=\"hljs-string\">\"UTF-8\"</span><span class=\"hljs-meta\">?&gt;</span></span>\n<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">project</span> <span class=\"hljs-attr\">xmlns</span>=<span class=\"hljs-string\">\"http://maven.apache.org/POM/4.0.0\"</span>\n         <span class=\"hljs-attr\">xmlns:xsi</span>=<span class=\"hljs-string\">\"http://www.w3.org/2001/XMLSchema-instance\"</span>\n         <span class=\"hljs-attr\">xsi:schemaLocation</span>=<span class=\"hljs-string\">\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\"</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">modelVersion</span>&gt;</span>4.0.0<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">modelVersion</span>&gt;</span>\n\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>com.xiaopizhu<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>helloSpringBoot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">version</span>&gt;</span>1.0-SNAPSHOT<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">version</span>&gt;</span>\n	<span class=\"hljs-comment\">&lt;!--springboot的父工程其中定义了常用的依赖，并且无依赖冲突--&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">parent</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-parent<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">version</span>&gt;</span>2.5.0<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">version</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">parent</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">project</span>&gt;</span>\n</code></div></pre>\n<p>注意上方的parent必须加，其中定义了springboot官方支持的n多依赖，基本上常用的已经有了，所以接下来导入依赖的时候，绝大部分都可以不加版本号。</p>\n<p>此时的工程结构为：</p>\n<p><img src=\"https://static.mszlu.com/a7302c88-e106-46ad-9713-dc9a6d523957.png\" alt=\"image20210523173241557.png\" /></p>\n<p><strong>第二步：</strong> 添加web依赖</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependencies</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependency</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-web<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependency</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependencies</span>&gt;</span>\n</code></div></pre>\n<p>添加上方的web依赖，其中间接依赖了spring-web，spring-webmvc，spring-core等spring和springmvc的包，并且集成了tomcat。</p>\n<p><strong>第三步：</strong> 编写启动类</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot;\n\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.SpringApplication;\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;\n\n<span class=\"hljs-meta\">@SpringBootApplication</span>\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">HelloApp</span> </span>{\n\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">static</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">main</span><span class=\"hljs-params\">(String[] args)</span> </span>{\n        SpringApplication.run(HelloApp.class,args);\n    }\n}\n\n</code></div></pre>\n<p>@SpringBootApplication注解标识了HelloApp为启动类，也是Spring Boot的核心。</p>\n<p><strong>第四步：</strong> 运行启动类的main方法</p>\n<p><img src=\"https://static.mszlu.com/dc17b43e-08df-46b0-bb7a-eb73044de7da.png\" alt=\"image20210523173712142.png\" /></p>\n<p>看到如上配置，证明启动成功，tomcat端口号默认为8080。</p>\n<p><strong>第五步：</strong>  如果想要修改端口号，可以在resources目录下新建application.properties</p>\n<pre><code class=\"lang-properties\">server.port=8082\n</code></pre>\n<p><strong>第六步：</strong> 重新运行</p>\n<p><img src=\"https://static.mszlu.com/318e4b7e-95d2-4e43-a18f-279ea6ff9495.png\" alt=\"image20210523174011613.png\" /></p>\n<p>此时的项目结构为：</p>\n<p><img src=\"https://static.mszlu.com/756e4ae0-c4c7-43a5-9b5d-bc7ce974a942.png\" alt=\"image20210523174032053.png\" /></p>\n<p><strong>src/main/java :</strong>  编写java代码，注意启动类需要放在项目的根包下。</p>\n<p><strong>src/main/resources:</strong>  放置资源的目录，比如springboot的配置文件，静态文件，mybatis配置，日志配置等。</p>\n<p><strong>src/test/java:</strong>  测试代码</p>\n<h2><a id=\"22_Http_138\"></a>2.2 编写一个Http接口</h2>\n<p><strong>第一步：</strong>  创建<code>HelloController</code>类，内容如下：</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot.controller;\n\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.GetMapping;\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.RequestMapping;\n<span class=\"hljs-keyword\">import</span> org.springframework.web.bind.annotation.RestController;\n\n<span class=\"hljs-meta\">@RestController</span>\n<span class=\"hljs-meta\">@RequestMapping</span>(<span class=\"hljs-string\">\"hello\"</span>)\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">HelloController</span> </span>{\n\n    <span class=\"hljs-meta\">@GetMapping</span>(<span class=\"hljs-string\">\"boot\"</span>)\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> String <span class=\"hljs-title\">hello</span><span class=\"hljs-params\">()</span></span>{\n        <span class=\"hljs-keyword\">return</span> <span class=\"hljs-string\">\"hello spring boot\"</span>;\n    }\n\n}\n\n</code></div></pre>\n<p><strong>注意包名，必须在启动类所在的包名下。</strong></p>\n<p>**第二步： ** 重启程序，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot</p>\n<p>得到结果：hello spring boot</p>\n<h2><a id=\"23__168\"></a>2.3 编写单元测试用例</h2>\n<p>**第一步： ** 添加spring boot测试依赖</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\">		<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependency</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-starter-test<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">scope</span>&gt;</span>test<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">scope</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependency</span>&gt;</span>\n</code></div></pre>\n<p><strong>第二步：</strong> 在src/test 下，编写测试用例</p>\n<pre><div class=\"hljs\"><code class=\"lang-java\"><span class=\"hljs-keyword\">package</span> com.xiaopizhu.springboot.controller;\n\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.BeforeAll;\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.BeforeEach;\n<span class=\"hljs-keyword\">import</span> org.junit.jupiter.api.Test;\n<span class=\"hljs-keyword\">import</span> org.springframework.boot.test.context.SpringBootTest;\n<span class=\"hljs-keyword\">import</span> org.springframework.http.MediaType;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.MockMvc;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders;\n<span class=\"hljs-keyword\">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders;\n\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.hamcrest.Matchers.equalTo;\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;\n<span class=\"hljs-keyword\">import</span> <span class=\"hljs-keyword\">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;\n\n<span class=\"hljs-meta\">@SpringBootTest</span>\n<span class=\"hljs-keyword\">public</span> <span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">TestHelloController</span> </span>{\n\n    <span class=\"hljs-keyword\">private</span> MockMvc mockMvc;\n\n    <span class=\"hljs-meta\">@BeforeEach</span>\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">beforeEach</span><span class=\"hljs-params\">()</span></span>{\n        mockMvc = MockMvcBuilders.standaloneSetup(<span class=\"hljs-keyword\">new</span> HelloController()).build();\n    }\n    <span class=\"hljs-meta\">@Test</span>\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">public</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">testHello</span><span class=\"hljs-params\">()</span> <span class=\"hljs-keyword\">throws</span> Exception </span>{\n        mockMvc.perform(MockMvcRequestBuilders.get(<span class=\"hljs-string\">\"/hello/boot\"</span>)\n                .accept(MediaType.APPLICATION_JSON))\n                .andExpect(status().isOk())\n                .andExpect(content().string(equalTo(<span class=\"hljs-string\">\"hello spring boot\"</span>)));\n    }\n}\n\n</code></div></pre>\n<p>上面的测试用例，是构建一个空的<code>WebApplicationContext</code>，并且在before中加载了HelloController，得以在测试用例中mock调用，模拟请求。</p>\n<h2><a id=\"24_jar_220\"></a>2.4 打包为jar运行</h2>\n<p><strong>第一步：</strong> 添加打包(maven构建springboot)插件</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\">  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">build</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">plugins</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">plugin</span>&gt;</span>\n                <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>org.springframework.boot<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n                <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n            <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">plugin</span>&gt;</span>\n        <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">plugins</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">build</span>&gt;</span>\n</code></div></pre>\n<p>在idea的右侧 maven中，使用package来打包程序，打包完成后，在target目录下生成helloSpringBoot-1.0-SNAPSHOT.jar</p>\n<p><img src=\"https://static.mszlu.com/45aa0db2-598f-4564-964c-a2d889dfbafe.png\" alt=\"image20210523181737720.png\" /></p>\n<p>**第二步： ** 打开cmd：找到jar对应的目录</p>\n<p>输入命令</p>\n<pre><div class=\"hljs\"><code class=\"lang-shell\">java -jar helloSpringBoot-1.0-SNAPSHOT.jar\n</code></div></pre>\n<p><img src=\"https://static.mszlu.com/74376f77-b8eb-4c2c-a4cc-d3bfe24901e3.png\" alt=\"image20210523182426404.png\" /></p>\n<p><strong>第三步：</strong>  测试，使用postman或者直接在浏览器输入http://localhost:8082/hello/boot</p>\n<p>得到结果：hello spring boot</p>\n<h2><a id=\"25_jar_253\"></a>2.5 查看jar包内容</h2>\n<pre><div class=\"hljs\"><code class=\"lang-shell\">jar tvf helloSpringBoot-1.0-SNAPSHOT.jar\n</code></div></pre>\n<h1><a id=\"3__259\"></a>3. 小结</h1>\n<ol>\n<li>通过Maven构建了一个空白Spring Boot项目，再通过引入web模块实现了一个简单的请求处理。</li>\n<li>通过修改配置文件，更改端口号</li>\n<li>编写了测试用例</li>\n<li>打包jar包运行</li>\n</ol>\n', 1405916999732707330);
-INSERT INTO `ms_article_body` VALUES (1513472944250642435, '123', '<p>123</p>\n', 1513472944250642433);
-INSERT INTO `ms_article_body` VALUES (1513791630131900420, 'Delicious', '<p>Delicious</p>\n', 1513791630131900418);
-INSERT INTO `ms_article_body` VALUES (1513792195041755139, '123123', '<p>123123</p>\n', 1513792195041755137);
+--
+-- Dumping data for table `ms_article_body`
+--
 
--- ----------------------------
--- Table structure for ms_article_tag
--- ----------------------------
+LOCK TABLES `ms_article_body` WRITE;
+/*!40000 ALTER TABLE `ms_article_body` DISABLE KEYS */;
+INSERT INTO `ms_article_body` VALUES (1001,'Jay Chou was born in Xinbei City, Taiwan Province, and his ancestral home is Yongchun County, Quanzhou City, Fujian Province. When he was 4 years old, his mother, Ye Hui-mei, sent him to tamio Yamaha Kindergarten music class to learn piano. When he was in the second grade of junior high school, his parents divorced due to personality differences, and Jay returned to his mother, Ye Huimei, to raise him. Middle school, did not take an examination of ordinary high school, the same year, because good at piano and was admitted to the first music class danjiang middle school. After graduating from high school, I failed to get into the music department of Taipei University twice, so I started working in a restaurant.\nIn September 1997, encouraged by his mother, Jay signed up for the Taipei Starlight TV entertainment show \"Super Newcomer\" and invited people to sing his own song \"Dreams Have Wings\". When host Wu Zongxian saw the score of the song, he invited Chou to work as a music assistant at Alfa Music Company. In 1998, she composed the song \"Tears Know\", which the company gave to Andy Lau and was rejected. Her songs \"Nunchucks\" and \"Ninja\" (later included in Jay Chou\'s album \"Fantexi\") were also rejected.','<p></p>\n',1001),(1002,'The Eiffel Tower (French: La Tour Eiffel; The Eiffel Tower, which stands on the Champ-de-Mars in Paris, France, beside the Seine river, was commissioned by the French government for the construction of the 1889 World\'s Fair to celebrate the 100th anniversary of the Victory of the French Revolution. Construction began on January 26, 1887 and was completed on March 31, 1889, making it the tallest building in the world at that time.\n\nThe Eiffel Tower was originally 312 meters high and is now 330 meters high. The first floor is 57 meters high and covers an area of 4,415 square meters, the second floor is 115 meters high and covers an area of 1,430 square meters, and the third floor is 276 meters high and covers an area of 250 square meters. There are five lifts from the square to the second floor and two double lifts from the second floor to the top floor. The tower has five areas: square, first floor, second floor, top floor and garden. It receives 7 million visitors every year.\n\nThe structure of the Eiffel Tower is both intuitive and simple: at its base are four giant angular inclined columns (54°) on a long base of 128 meters on each side, supported by the first platform at 55 meters; There are four slightly curved angular columns connecting the first platform and the second platform with an elevation of 115 meters; Up into a slender, almost vertical, 189-meter-tall, rigid obelisk that leads to the top platform; The platform was topped by a small arching roof and a flagpole (now a television antenna). The slight curvature of the angular columns between the first and second platforms enhances the feeling of the tower soaring into the sky. All columns and obelisks are constructed with a network of X - shaped wind-bracing trusses. The whole tower has four solid caisson foundations that reach down into the recanting soil.','<p></p>\n',1002),(1003,'Pizza, also known as Italian pie, is a kind of food originated in Italy, in the world quite popular. Pizza is usually made of fermented pita covered with tomato sauce, cheese and other toppings and baked in an oven.\n\nCheese is usually made with mozzarella, but can also be mixed with several cheeses, including Parmesan, Romano, Ricotta or Monterey Jack, mozzarella, etc.\n\nPizza is derived from bread, which occupies an important position as a staple food in western history. It is not constant over time, but by adding different ingredients to better meet people\'s needs and hobbies. Historians have found a similar transition from bread to pizza 3,000 years ago in Sardinia, Italy. In ancient Greece, pancakes πλακοῦς (plakous, and πλακοῦντος - plakountos) were topped with spices like garlic and scallions. Then there were the Persians, a king named Dario Il Grande (521-486 a.C.) who used stones to bake a kind of \'flat bread\' with cheese added. The earliest transients also appear in the western poem Eneide. They are usually called \"focaccia\" (meaning roasted with fire), the Western \"coca\" (suitable for both salty and sweet), the Greek and Italian \"pita\" or the Turkish \"pide\", And the Piadina of Romagna. And then there are other countries that have similar foods. As time goes by, the language changes as pita/pitta becomes pizza, and the ingredients are no longer limited to the original. The innovation of pizza came from the addition of tomatoes (there was also a fish, which replaced the tomato). Naples was the first city to introduce this change, and it is arguably the birthplace of modern pizza. But it was a Neapolitan chef who finally introduced pizza to the world in 1889 with pizza Margherita, a tricolor pizza named after Queen Savoia. According to statistics, there are more than 20,000 pizza restaurants in Italy, including 1,200 in the Naples area. Most Neapolitans eat at least one pizza a week, and some eat it almost every day for lunch and dinner. Diners, rich and poor alike, are used to folding up their pizzas and eating them in their hands. This has become one of the basis for identifying the merits of pizza handwork. The pizza has to be just the right amount of stiffness, so that even when folded \"like a wallet,\" the outside won\'t crack.','<p>Delicious</p>\n',1003),(1004,'League of Legends (LOL) is an online MOBA game developed by Riot Games in the US and operated by Tencent\'s game agency in China. The game has hundreds of character heroes and features such as a ranking system and runes system.\n\n\"Hero alliance\" is committed to promoting the development of the global esports, in addition to the linkage of each division to develop professional league, build system of e-sports, every year will hold \"hero league season in the championship,\" \"hero alliance global finals\" \"hero league all-star game\" three world-class competition, formed its own unique electronic sports culture.\n\nSurrounded by treacherous seas, the allied provinces formed Ionia in a vast archipelago known as the \"Newborn Land\". The search for balance has long been a cultural staple here, so the boundary between the physical and the spiritual is also blurred here, especially in the wild forests and mountains.\n\nAlthough the magic of this land can be fickle and the creatures that inhabit it can be dangerous and magical, the people of Ionia have lived a prosperous life for the past hundreds of years. The monasteries, the militia regiments of the provinces, and even ionia itself were sufficient to protect the inhabitants.\n\nBut that all came to an end twelve years ago, for that was the year when Knoxus attacked the Birth Land. The empire raged in Ionia as far as the eye could see, and it took many years of hard fighting for ionians to defeat the enemy at great cost.\n\nIonia is now in a fragile peace. Different responses to the war divided the land -- some groups, like the Shoji monks and the Balaji sect, wanted to return to the peaceful and pastoral traditions of isolation. Other more radical factions, such as the Brotherhood of Navoli and The Shadow Stream, advocated the militarization of the magic of the land and the creation of a unified state strong enough to retaliate against Knoxus.\n\nIonia\'s fate hangs in a delicate balance. Few want to tip either way, but all can feel the ground shaking beneath their feet.','<p>123123</p>\n',1004),(1005,'As a child, Taylor Swift lived on an 11-acre Christmas tree farm in Wyoming, Pennsylvania. When she was 10, she wrote a three-page poem, \"The Monster in My Closet,\" that won an American Poetry contest. In the same year, he began to perform in Philadelphia and surrounding areas. At the age of 11, he took the stage to sing the National anthem before an NBA team\'s Philadelphia 76ers game. It was watching Faith Hill on TV in 2001 that inspired her to become a country singer and move to Nashville. After learning chords, she wrote her first song, Lucky You. In the same year, I drove to Nashville with my family and went to Music Street, where there were many record companies, and sent original music demos to the front desk of each record company.\nTaylor Swift\'s parents moved to Nashville to help their daughter pursue her music dreams. In 2003, after showcasing original songs for RCA Records in the US, Taylor Swift was offered a contract and began her music writing career. But Taylor Swift, 15, couldn\'t handle waiting three years to release her records and left the label. Taylor Swift later caught the eye of Scott Borchetta while performing at The Bluebird Cafe, a Nashville songwriters\' rendezvous, and became the first artist to sign to his Big Machine label.','<p><p>',1005),(1516084926642425858,'# Introduction\n## 1. The Flash\n***The Flash*** is an American science fiction television series co-produced by DC Entertainment and Warner Bros. Television. Greg Berlanti, Andrew Kreisberg and Goff Johns produced The series. David Nath directed The first episode. It stars Grant Gustin, Candace Parton, Jesse Martin, Tom Gavana, Carlos Valdes, Michelle Harrison, Danielle Panabek and more. Arrow is a spin-off from DC Comics of the same name.\nThe story tells the story of Barry Allen, who is struck by lightning during a particle accelerator explosion and gains the ability to move at extreme speed. With the help of the lab, the flash is a superhero fighting crime. [1]\nSeason 1 premiered on October 7, 2014 on the CW, Season 2 on October 6, 2015, Season 3 on October 4, 2016, Season 4 on October 10, 2017, Season 5 on October 9, 2018, Season 6 on October 8, 2019, Season 7 premiered on March 2, 2021, followed by Season 8 on November 16, 2021.\n![The Flash](https://pics0.baidu.com/feed/f3d3572c11dfa9ec0f100d98e2224107908fc17e.jpeg?token=963884f96ba7e9a37786487e6b7b1171&s=50c5b144feab92550050009d0300508b)\n## 2. Superman\n==++Superman++== is a superhero of DC Comics, the first superhero in the history of American comic books. He first appeared in the first issue of Action Comics (June 1938). Co-created by Jerry Siegel and Joe Shuste.\nSuperman was born kal-El in Krypton. When Krypton was about to be destroyed, his parents sent Carl to Earth in a spaceship as an infant. When the ship crashed in Smallville, Kansas, Carl was found by a farmer and his wife, Clark Kent, and raised as Clark Kent on Earth.\nAs an adult, Clark moved to Metropolis to work as a reporter for the Daily Planet. He has innate super ability and extremely strong sense of justice and compassion, every time in crisis, wearing blue tights, put on red cloak, incarnation of superman chivalrous, save the world.\n![Superman](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.wohaoyun.com%2Fimg%2FM00%2F02%2FB7%2FwKjg2lvFm-OAWrV6AAEb4fR1Neg825.jpg&refer=http%3A%2F%2Fimg.wohaoyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652888817&t=d4bdf642a092ca1217aff2d7459b51ac)','<h1><a id=\"Introduction_0\"></a>Introduction</h1>\n<h2><a id=\"1_The_Flash_1\"></a>1. The Flash</h2>\n<p><em><strong>The Flash</strong></em> is an American science fiction television series co-produced by DC Entertainment and Warner Bros. Television. Greg Berlanti, Andrew Kreisberg and Goff Johns produced The series. David Nath directed The first episode. It stars Grant Gustin, Candace Parton, Jesse Martin, Tom Gavana, Carlos Valdes, Michelle Harrison, Danielle Panabek and more. Arrow is a spin-off from DC Comics of the same name.<br />\nThe story tells the story of Barry Allen, who is struck by lightning during a particle accelerator explosion and gains the ability to move at extreme speed. With the help of the lab, the flash is a superhero fighting crime. [1]<br />\nSeason 1 premiered on October 7, 2014 on the CW, Season 2 on October 6, 2015, Season 3 on October 4, 2016, Season 4 on October 10, 2017, Season 5 on October 9, 2018, Season 6 on October 8, 2019, Season 7 premiered on March 2, 2021, followed by Season 8 on November 16, 2021.<br />\n<img src=\"https://pics0.baidu.com/feed/f3d3572c11dfa9ec0f100d98e2224107908fc17e.jpeg?token=963884f96ba7e9a37786487e6b7b1171&amp;s=50c5b144feab92550050009d0300508b\" alt=\"The Flash\" /></p>\n<h2><a id=\"2_Superman_6\"></a>2. Superman</h2>\n<p><mark><ins>Superman</ins></mark> is a superhero of DC Comics, the first superhero in the history of American comic books. He first appeared in the first issue of Action Comics (June 1938). Co-created by Jerry Siegel and Joe Shuste.<br />\nSuperman was born kal-El in Krypton. When Krypton was about to be destroyed, his parents sent Carl to Earth in a spaceship as an infant. When the ship crashed in Smallville, Kansas, Carl was found by a farmer and his wife, Clark Kent, and raised as Clark Kent on Earth.<br />\nAs an adult, Clark moved to Metropolis to work as a reporter for the Daily Planet. He has innate super ability and extremely strong sense of justice and compassion, every time in crisis, wearing blue tights, put on red cloak, incarnation of superman chivalrous, save the world.<br />\n<img src=\"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.wohaoyun.com%2Fimg%2FM00%2F02%2FB7%2FwKjg2lvFm-OAWrV6AAEb4fR1Neg825.jpg&amp;refer=http%3A%2F%2Fimg.wohaoyun.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1652888817&amp;t=d4bdf642a092ca1217aff2d7459b51ac\" alt=\"Superman\" /></p>\n',1516084926579511297);
+/*!40000 ALTER TABLE `ms_article_body` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_article_tag`
+--
+
 DROP TABLE IF EXISTS `ms_article_tag`;
-CREATE TABLE `ms_article_tag`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_article_tag` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `article_id` bigint NOT NULL,
   `tag_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `article_id`(`article_id` ASC) USING BTREE,
-  INDEX `tag_id`(`tag_id` ASC) USING BTREE,
+  KEY `article_id` (`article_id`) USING BTREE,
+  KEY `tag_id` (`tag_id`) USING BTREE,
   CONSTRAINT `Articless` FOREIGN KEY (`article_id`) REFERENCES `ms_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Tag` FOREIGN KEY (`tag_id`) REFERENCES `ms_tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1513472944250642435 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1516084926642425858 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_article_tag
--- ----------------------------
-INSERT INTO `ms_article_tag` VALUES (1, 1, 7);
-INSERT INTO `ms_article_tag` VALUES (2, 1, 5);
-INSERT INTO `ms_article_tag` VALUES (3, 1, 8);
-INSERT INTO `ms_article_tag` VALUES (4, 9, 7);
-INSERT INTO `ms_article_tag` VALUES (5, 10, 7);
-INSERT INTO `ms_article_tag` VALUES (6, 10, 8);
-INSERT INTO `ms_article_tag` VALUES (7, 10, 5);
-INSERT INTO `ms_article_tag` VALUES (8, 10, 6);
-INSERT INTO `ms_article_tag` VALUES (1405564731321802753, 1405564731300831233, 5);
-INSERT INTO `ms_article_tag` VALUES (1405916999787233281, 1405916999732707330, 5);
-INSERT INTO `ms_article_tag` VALUES (1513472944250642434, 1513472944250642433, 7);
-INSERT INTO `ms_article_tag` VALUES (1513791630131900419, 1513791630131900418, 8);
-INSERT INTO `ms_article_tag` VALUES (1513792195041755138, 1513792195041755137, 7);
+--
+-- Dumping data for table `ms_article_tag`
+--
 
--- ----------------------------
--- Table structure for ms_category
--- ----------------------------
+LOCK TABLES `ms_article_tag` WRITE;
+/*!40000 ALTER TABLE `ms_article_tag` DISABLE KEYS */;
+INSERT INTO `ms_article_tag` VALUES (1,1001,9),(2,1001,11),(3,1002,12),(4,1002,13),(5,1002,14),(6,1003,1),(7,1003,2),(8,1004,3),(9,1005,9),(10,1005,11),(1516084926642425857,1516084926579511297,15);
+/*!40000 ALTER TABLE `ms_article_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_category`
+--
+
 DROP TABLE IF EXISTS `ms_category`;
-CREATE TABLE `ms_category`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_category` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_category
--- ----------------------------
-INSERT INTO `ms_category` VALUES (1, '/static/category/front.png', 'Cook', 'cook');
-INSERT INTO `ms_category` VALUES (2, '/static/category/back.png', 'Game', 'game');
-INSERT INTO `ms_category` VALUES (3, '/static/category/lift.jpg', 'Live', 'live style');
-INSERT INTO `ms_category` VALUES (4, '/static/category/database.png', 'Photography', 'taking photos');
-INSERT INTO `ms_category` VALUES (5, '/static/category/language.png', 'Travel', 'good place to travel');
+--
+-- Dumping data for table `ms_category`
+--
 
--- ----------------------------
--- Table structure for ms_comment
--- ----------------------------
+LOCK TABLES `ms_category` WRITE;
+/*!40000 ALTER TABLE `ms_category` DISABLE KEYS */;
+INSERT INTO `ms_category` VALUES (1,'/static/category/front.png','Cooking','Share knowledge about food.'),(2,'/static/category/back.png','Sport','All kinds of sports.'),(3,'/static/category/lift.jpg','Life','Share the good things in your life.'),(4,'/static/category/database.png','Art','Art comes from life.'),(5,'/static/category/language.png','Travel','Find a good place to travel');
+/*!40000 ALTER TABLE `ms_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_comment`
+--
+
 DROP TABLE IF EXISTS `ms_comment`;
-CREATE TABLE `ms_comment`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_comment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_date` bigint NOT NULL,
@@ -146,117 +152,155 @@ CREATE TABLE `ms_comment`  (
   `to_uid` bigint NOT NULL,
   `level` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `article_id`(`article_id` ASC) USING BTREE,
-  INDEX `Author`(`author_id` ASC) USING BTREE,
+  KEY `article_id` (`article_id`) USING BTREE,
+  KEY `Author` (`author_id`) USING BTREE,
   CONSTRAINT `Article` FOREIGN KEY (`article_id`) REFERENCES `ms_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Author` FOREIGN KEY (`author_id`) REFERENCES `ms_sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1513775551997313027 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1515967355528216578 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_comment
--- ----------------------------
-INSERT INTO `ms_comment` VALUES (53, '写的好', 123213213213, 1, 1, 0, 1, '1');
-INSERT INTO `ms_comment` VALUES (54, '111', 123123123123, 1, 1, 53, 1, '2');
-INSERT INTO `ms_comment` VALUES (56, '222', 12312, 1, 1, 0, 1, '1');
-INSERT INTO `ms_comment` VALUES (1405204547248377858, '123', 1623861846172, 1, 1, 53, 1, '2');
-INSERT INTO `ms_comment` VALUES (1405205050975899650, '123123', 1623861966270, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405205572185280513, '3333', 1623862090534, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405206087392612353, '7777', 1623862213367, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405206147568291842, '7777', 1623862227714, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405206347246522370, '666', 1623862275315, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405208637198131202, '99999999999999999999', 1623862821278, 1, 1, 0, 0, '1');
-INSERT INTO `ms_comment` VALUES (1405209691876790274, '66666666666666666', 1623863072732, 1, 1, 1405208637198131202, 1, '2');
-INSERT INTO `ms_comment` VALUES (1513791493829603329, 'asdawd', 1649750991670, 1513472944250642433, 1513472880207814658, 0, 0, '1');
+--
+-- Dumping data for table `ms_comment`
+--
 
--- ----------------------------
--- Table structure for ms_permission
--- ----------------------------
+LOCK TABLES `ms_comment` WRITE;
+/*!40000 ALTER TABLE `ms_comment` DISABLE KEYS */;
+INSERT INTO `ms_comment` VALUES (1513791493829603329,'asdawd',1649750991670,1002,3,0,0,'1'),(1515967355528216577,'good',1650269757525,1002,1515966632388263938,1513791493829603329,3,'2');
+/*!40000 ALTER TABLE `ms_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_permission`
+--
+
 DROP TABLE IF EXISTS `ms_permission`;
-CREATE TABLE `ms_permission`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_permission` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_permission
--- ----------------------------
-INSERT INTO `ms_permission` VALUES (1, '查询权限列表', '/admin/permission/permissionList', '查询权限列表');
-INSERT INTO `ms_permission` VALUES (2, '11', '11', '111');
-INSERT INTO `ms_permission` VALUES (7, '1213', '123', '123');
-INSERT INTO `ms_permission` VALUES (8, '删除权限', '/admin/permission/add', '删除权限');
+--
+-- Dumping data for table `ms_permission`
+--
 
--- ----------------------------
--- Table structure for ms_sys_log
--- ----------------------------
+LOCK TABLES `ms_permission` WRITE;
+/*!40000 ALTER TABLE `ms_permission` DISABLE KEYS */;
+INSERT INTO `ms_permission` VALUES (1,'查询权限列表','/admin/permission/permissionList','查询权限列表'),(2,'11','11','111'),(7,'1213','123','123'),(8,'删除权限','/admin/permission/add','删除权限');
+/*!40000 ALTER TABLE `ms_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_sys_log`
+--
+
 DROP TABLE IF EXISTS `ms_sys_log`;
-CREATE TABLE `ms_sys_log`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_sys_log` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `create_date` bigint NULL DEFAULT NULL,
-  `ip` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `module` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `nickname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `operation` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `time` bigint NULL DEFAULT NULL,
-  `userid` bigint NULL DEFAULT NULL,
+  `create_date` bigint DEFAULT NULL,
+  `ip` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `module` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `nickname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `operation` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `time` bigint DEFAULT NULL,
+  `userid` bigint DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_sys_log
--- ----------------------------
+--
+-- Dumping data for table `ms_sys_log`
+--
 
--- ----------------------------
--- Table structure for ms_sys_user
--- ----------------------------
+LOCK TABLES `ms_sys_log` WRITE;
+/*!40000 ALTER TABLE `ms_sys_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ms_sys_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_sys_user`
+--
+
 DROP TABLE IF EXISTS `ms_sys_user`;
-CREATE TABLE `ms_sys_user`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_sys_user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `account` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号',
-  `admin` bit(1) NULL DEFAULT NULL COMMENT '是否管理员',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
-  `create_date` bigint NULL DEFAULT NULL COMMENT '注册时间',
-  `deleted` bit(1) NULL DEFAULT NULL COMMENT '是否删除',
-  `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `last_login` bigint NULL DEFAULT NULL COMMENT '最后登录时间',
-  `mobile_phone_number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
-  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
-  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
-  `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '加密盐',
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `account` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '账号',
+  `admin` bit(1) DEFAULT NULL COMMENT '是否管理员',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像',
+  `create_date` bigint DEFAULT NULL COMMENT '注册时间',
+  `deleted` bit(1) DEFAULT NULL COMMENT '是否删除',
+  `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮箱',
+  `last_login` bigint DEFAULT NULL COMMENT '最后登录时间',
+  `mobile_phone_number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '手机号',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '昵称',
+  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码',
+  `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '加密盐',
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1513472880207814659 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1515966632388263939 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_sys_user
--- ----------------------------
-INSERT INTO `ms_sys_user` VALUES (1, 'admin', b'1', 'http://localhost:8080/static/img/logo.b3a48c0.png', 20210622223122, b'0', '11', 20210630223130, '12', '李四', '15f08f86435b060236fa9ccea751e9e5', '12', '1');
-INSERT INTO `ms_sys_user` VALUES (1404446129264832513, 'lisi', b'1', '/static/img/logo.b3a48c0.png', 1623681025218, b'0', '', 1623681025218, NULL, '李四', '1d01d52c40f4ff57ad3f93a06daf21d5', '', '');
-INSERT INTO `ms_sys_user` VALUES (1404448463944462338, '12213', b'1', '/static/img/logo.b3a48c0.png', 1623681581855, b'0', '', 1623681581855, NULL, '123', '8628d1f407f72e10ac947a032fe5ad29', '', '');
-INSERT INTO `ms_sys_user` VALUES (1404448588146192386, '123', b'1', '/static/img/logo.b3a48c0.png', 1623681611474, b'0', '', 1623681611474, NULL, '123', '5e112646dbf3570f8e23d0cf1027ede1', '', '');
-INSERT INTO `ms_sys_user` VALUES (1513472880207814658, 'xjtlu', b'1', '', 1649675028262, b'0', '', 1649675028262, NULL, 'xjtlu', '10855daa04ccff48f1dc9d53d07eebe6', '', '');
+--
+-- Dumping data for table `ms_sys_user`
+--
 
--- ----------------------------
--- Table structure for ms_tag
--- ----------------------------
+LOCK TABLES `ms_sys_user` WRITE;
+/*!40000 ALTER TABLE `ms_sys_user` DISABLE KEYS */;
+INSERT INTO `ms_sys_user` VALUES (1,'admin',_binary '','http://localhost:8080/static/img/logo.b3a48c0.png',20210622223122,_binary '\0','11',20210630223130,'12','李四','15f08f86435b060236fa9ccea751e9e5','12','1'),(2,'lisi',_binary '','/static/img/logo.b3a48c0.png',1623681025218,_binary '\0','',1623681025218,NULL,'李四','1d01d52c40f4ff57ad3f93a06daf21d5','',''),(3,'xjtlu',_binary '','',1649675028262,_binary '\0','',1649675028262,NULL,'xjtlu','10855daa04ccff48f1dc9d53d07eebe6','',''),(1404448463944462338,'12213',_binary '','/static/img/logo.b3a48c0.png',1623681581855,_binary '\0','',1623681581855,NULL,'123','8628d1f407f72e10ac947a032fe5ad29','',''),(1404448588146192386,'123',_binary '','/static/img/logo.b3a48c0.png',1623681611474,_binary '\0','',1623681611474,NULL,'123','5e112646dbf3570f8e23d0cf1027ede1','',''),(1515966632388263938,'user',_binary '','',1650269585126,_binary '\0','',1650269585126,NULL,'user','d41433c60fbdd593ce7d2878e179e2d9','','');
+/*!40000 ALTER TABLE `ms_sys_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_tag`
+--
+
 DROP TABLE IF EXISTS `ms_tag`;
-CREATE TABLE `ms_tag`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_tag` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of ms_tag
--- ----------------------------
-INSERT INTO `ms_tag` VALUES (5, '/static/tag/java.png', 'Music');
-INSERT INTO `ms_tag` VALUES (6, '/static/tag/java.png', 'Blog');
-INSERT INTO `ms_tag` VALUES (7, '/static/tag/java.png', 'Travelling');
-INSERT INTO `ms_tag` VALUES (8, '/static/tag/css.png', 'Food');
+--
+-- Dumping data for table `ms_tag`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+LOCK TABLES `ms_tag` WRITE;
+/*!40000 ALTER TABLE `ms_tag` DISABLE KEYS */;
+INSERT INTO `ms_tag` VALUES (1,'/static/tag/java.png','Food'),(2,'/static/tag/java.png','Recipe'),(3,'/static/tag/java.png','E-sports'),(4,'/static/tag/css.png','Ball game'),(5,NULL,'Athletics'),(6,NULL,'Other sports'),(7,NULL,'Daily life'),(8,NULL,'OOTD'),(9,NULL,'Music'),(10,NULL,'Fine arts'),(11,NULL,'Artist'),(12,NULL,'Tourist attraction'),(13,NULL,'Travel strategy'),(14,NULL,'Scenic spot introduction'),(15,NULL,'Moive');
+/*!40000 ALTER TABLE `ms_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'new_schema'
+--
+
+--
+-- Dumping routines for database 'new_schema'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-04-19  0:05:55
