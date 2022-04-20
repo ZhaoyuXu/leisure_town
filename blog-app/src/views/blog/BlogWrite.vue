@@ -144,7 +144,7 @@
     },
     computed: {
       title (){
-        return '写文章 - Leisure Town'
+        return '发文章 - Leisure Town'
 		}
 	},
     methods: {
@@ -164,7 +164,7 @@
 
         }).catch(error => {
           if (error !== 'error') {
-            that.$message({type: 'error', message: '文章加载失败', showClose: true})
+            that.$message({type: 'error', message: '小镇文章加载失败', showClose: true})
           }
         })
       },
@@ -214,7 +214,7 @@
 
             let loading = this.$loading({
               lock: true,
-              text: '发布中，请稍后...'
+              text: '文章发布中，请稍后...'
             })
 
             publishArticle(article,this.$store.state.token).then((data) => {
@@ -223,7 +223,7 @@
                 that.$message({message: '发布成功啦', type: 'success', showClose: true})
                 that.$router.push({path: `/view/${data.data.id}`})
               }else{
-                that.$message({message: error, type: '发布文章失败:'+data.msg, showClose: true});
+                that.$message({message: error, type: '发布失败:'+data.msg, showClose: true});
               }
 
             }).catch((error) => {
@@ -253,12 +253,12 @@
           if(data.success){
             that.categorys = data.data
           }else{
-             that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
+             that.$message({type: 'error', message: '小镇文章分类加载失败', showClose: true})
           }
 
         }).catch(error => {
           if (error !== 'error') {
-            that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
+            that.$message({type: 'error', message: '小镇文章分类加载失败', showClose: true})
           }
         })
 
@@ -266,11 +266,11 @@
           if(data.success){
             that.tags = data.data
           }else{
-             that.$message({type: 'error', message: '标签加载失败', showClose: true})
+             that.$message({type: 'error', message: '小镇标签加载失败', showClose: true})
           }
         }).catch(error => {
           if (error !== 'error') {
-            that.$message({type: 'error', message: '标签加载失败', showClose: true})
+            that.$message({type: 'error', message: '小镇标签加载失败', showClose: true})
           }
         })
 

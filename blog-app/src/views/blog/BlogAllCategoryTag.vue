@@ -17,7 +17,7 @@
                   </a>
 
                   <div class="me-allct-meta">
-                    <span>{{c.articles}} 文章</span>
+                    <span>{{c.articles}} 小镇文章</span>
                   </div>
                 </div>
               </li>
@@ -77,7 +77,7 @@
       },
       categoryTagTitle (){
         if(this.currentActiveName == 'category'){
-          return '文章分类 - Leisure Town'
+          return '小镇文章分类 - Leisure Town'
         }
         console.info('dddd')
         return '小镇标签 - Leisure Town'
@@ -87,16 +87,16 @@
       view(id) {
         this.$router.push({path: `/${this.currentActiveName}/${id}`})
       },
-  /*    getCategorys() {
+      getCategorys() {
         let that = this
         getAllCategorysDetail().then(data => {
           that.categorys = data.data
         }).catch(error => {
           if (error !== 'error') {
-            that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
+            that.$message({type: 'error', message: '小镇文章分类加载失败', showClose: true})
           }
         })
-      },*/
+      },
       getTags() {
         let that = this
         getAllTagsDetail().then(data => {

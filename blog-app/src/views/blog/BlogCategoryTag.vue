@@ -14,7 +14,7 @@
             <p>{{ct.description}}</p>
           </template>
 
-          <span class="me-ct-meta">{{ct.articles}} 文章</span>
+          <span class="me-ct-meta" style = "font-size: 28px; ">{{ct.articles}} 分类文章</span>
         </div>
 
         <div class="me-ct-articles">
@@ -59,7 +59,7 @@
         if(this.$route.params.type === 'tag'){
           return `${this.ct.tagName} - 小镇标签 - Leisure Town`
         }
-        return `${this.ct.categoryName} - 文章分类 - Leisure Town`
+        return `${this.ct.categoryName} - 小镇文章分类 - Leisure Town`
       }
     },
     methods: {
@@ -75,17 +75,17 @@
         }
 
       },
-  /*    getCategoryDetail(id) {
+      getCategoryDetail(id) {
         let that = this
        getCategoryDetail(id).then(data => {
           that.ct = data.data
         }).catch(error => {
           if (error !== 'error') {
-            that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
+            that.$message({type: 'error', message: '小镇文章分类加载失败', showClose: true})
           }
         })
-      },*/
-  /*    getTagDetail(id) {
+      },
+   getTagDetail(id) {
         let that = this
         getTagDetail(id).then(data => {
           that.ct = data.data
@@ -94,7 +94,7 @@
             that.$message({type: 'error', message: '小镇标签加载失败', showClose: true})
           }
         })
-      },*/
+      },
       getArticlesByCategory(id) {
         let that = this
         getArticlesByCategory(id).then(data => {
@@ -149,7 +149,7 @@
 
   .me-ct-meta {
     font-size: 12px;
-    color: #969696;
+    color: rgb(25, 71, 41);
   }
 
   .me-ct-articles {

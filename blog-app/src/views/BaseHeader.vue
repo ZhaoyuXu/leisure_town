@@ -21,7 +21,7 @@ nn<template>
           "<el-menu-item index="/category/all" style="font-size: 20px;color:white"">小镇文章分类</el-menu-item>
           <el-menu-item index="/tag/all" style="font-size: 20px;color:white"">小镇标签</el-menu-item>
       <!--    <el-menu-item index="/archives" style="font-size: 20px;color:white">小镇文章</el-menu-item>-->
-          <el-col :span="4" :offset="4">
+          <el-col :span="4" :offset="7">
             <el-menu-item index="/write" style="font-size: 20px;color:white"><i class="el-icon-edit"></i>发文章</el-menu-item>
           </el-col>
         </el-menu>

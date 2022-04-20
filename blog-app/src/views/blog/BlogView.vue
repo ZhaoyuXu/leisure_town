@@ -19,9 +19,9 @@
             <div class="me-view-info">
               <span>{{article.author.nickname}}</span>
               <div class="me-view-meta">
-                <span>{{article.createDate | format}}</span>
-                <span>阅读   {{article.viewCounts}}</span>
-                <span>评论   {{article.commentCounts}}</span>
+                <span>发布于 {{article.createDate | format}}</span>
+                <span>阅读次数   {{article.viewCounts}}</span>
+                <!--<span>评论   {{article.commentCounts}}</span>-->
               </div>
 
             </div>
@@ -85,9 +85,6 @@
               </el-row>
             </div>
 
-            <div class="me-view-comment-title">
-              <span>{{article.commentCounts}} 条评论</span>
-            </div>
 
             <commment-item
               v-for="(c,index) in comments"

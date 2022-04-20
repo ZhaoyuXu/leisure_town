@@ -100,7 +100,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (to.matched.some(r => r.meta.requireLogin)) {
-      Message.error("请先登录哦");
+      Message.error("请先登录哦！");
     }
     else {
       next();

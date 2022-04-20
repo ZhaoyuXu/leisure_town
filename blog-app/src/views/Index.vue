@@ -61,7 +61,7 @@
          getHotArtices().then(data => {
            that.hotArticles = data.data
          }).catch(error => {
-        /*   if (error !== 'error') {
+       /*    if (error !== 'error') {
              that.$message({type: 'error', message: '最热文章加载失败!', showClose: true})
            }*/
 
@@ -96,7 +96,7 @@
            this.archives = data.data
          })).catch(error => {
            if (error !== 'error') {
-             that.$message({type: 'error', message: '文章归档加载失败!', showClose: true})
+             that.$message({type: 'error', message: '小镇文章加载失败!', showClose: true})
            }
          })
        }
