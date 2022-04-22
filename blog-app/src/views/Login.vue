@@ -67,7 +67,7 @@
                 that.$router.go(-1)
             }).catch((error) => {
               if (error !== 'error') {
-                that.$message({message: error, type: 'error', showClose: true});
+                that.$message({type: 'error', message: '用户或密码不存在', showClose: true});
               }
             })
           } else {
