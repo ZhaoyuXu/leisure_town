@@ -27,7 +27,11 @@ public class ArticleController {
 //        return Result.success(articles);
     }
 
-
+    @PostMapping("hot")
+    public Result hotArticle(){
+        int limit = 6;
+        return articleService.hotArticle(limit);
+    }
 
     @PostMapping("view/{id}")
     public Result findArticleById(@PathVariable("id") long articleId){
@@ -39,4 +43,10 @@ public class ArticleController {
         return articleService.publish(articleParam);
     }
 
+    @PostMapping("search")
+    public Result search(@RequestBody ArticleParam articleParam){
+        //写一个搜索接口
+        String search = articleParam.getSearch();
+        return articleService.searchArticle(search);
+    }
 }

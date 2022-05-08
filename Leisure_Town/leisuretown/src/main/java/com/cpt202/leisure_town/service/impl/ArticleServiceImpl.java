@@ -1,6 +1,7 @@
 package com.cpt202.leisure_town.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cpt202.leisure_town.dao.mapper.ArticleBodyMapper;
 import com.cpt202.leisure_town.dao.mapper.ArticleMapper;
 import com.cpt202.leisure_town.dao.mapper.ArticleTagMapper;
@@ -55,6 +56,18 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
     @Override
+    public Result hotArticle(int limit) {
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(Article::getViewCounts);
+        queryWrapper.select(Article::getId, Article::getTitle);
+        queryWrapper.last("limit " + limit);
+
+        List<Article> articles = articleMapper.selectList(queryWrapper);
+
+        return Result.success(copyList(articles, false, false));
+    }
+
+    @Override
     public Result findArticleById(long articleId){
         Article article = this.articleMapper.selectById(articleId);
         ArticleVo articleVo = copy(article, true, true, true, true);
@@ -105,6 +118,20 @@ public class ArticleServiceImpl implements ArticleService{
         return Result.success(map);
 
     }
+
+    @Override
+    public Result searchArticle(String search) {
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(Article::getViewCounts);
+        queryWrapper.select(Article::getId,Article::getTitle);
+        queryWrapper.like(Article::getTitle,search);
+        //select id,title from article order by view_counts desc limit 5
+        List<Article> articles = articleMapper.selectList(queryWrapper);
+
+        return Result.success(copyList(articles,false,false));
+    }
+
+
 
     public List<ArticleVo> copyList(List<Article> records, boolean isTag, boolean isAuthor){
         List<ArticleVo> articleVoList = new ArrayList<>();

@@ -17,4 +17,8 @@ public interface ArticleService {
     Result findArticleById(long articleId);
 
     Result publish(ArticleParam articleParam);
+
+    Result hotArticle(int limit);
+
+    Result searchArticle(String search);
 }
