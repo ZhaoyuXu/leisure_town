@@ -13,25 +13,43 @@ nn<template>
         Leisure Town
       </el-col>
 
-      <el-col v-if="!simple" :span="16" style = "color: rgb(25, 71, 41)">
+      <el-col v-if="!simple" :span="11" style = "color: rgb(25, 71, 41)">
         <el-menu :router=true menu-trigger="click" active-text-color="rgb(255, 255, 255)" :default-active="activeIndex" text-color="rgb(25, 71, 41)"
         background-color="rgb(25, 71, 41)"
                  mode="horizontal">
           <el-menu-item index="/" style="font-size: 20px;color:white"" >小镇</el-menu-item>
           "<el-menu-item index="/category/all" style="font-size: 20px;color:white"">小镇文章分类</el-menu-item>
           <el-menu-item index="/tag/all" style="font-size: 20px;color:white"">小镇标签</el-menu-item>
-      <!--    <el-menu-item index="/archives" style="font-size: 20px;color:white">小镇文章</el-menu-item>-->
-          <el-col :span="4" :offset="7">
+      <!--    <el-menu-item index="/archives" style="font-size: 20px;color:white">小镇文章归档</el-menu-item>-->
+
+          <el-col :span="3" :offset="4">
             <el-menu-item index="/write" style="font-size: 20px;color:white"><i class="el-icon-edit"></i>发文章</el-menu-item>
           </el-col>
         </el-menu>
       </el-col>
 
+
       <template v-else>
         <slot></slot>
       </template>
 
-      <el-col :span="4">
+
+<el-col :span="4" style = "color: rgb(25, 71, 41)">
+  <el-menu mode ="horizontal" active-text-color="rgb(25,71,41)"  background-color="rgb(25, 71, 41)" >
+    <el-menu-item>
+      <template>
+        <el-autocomplete
+          v-model="search"
+          :fetch-suggestions="querySearchAsync"
+          placeholder="请输入查找内容"
+          @select="handleSelect"></el-autocomplete>
+      </template>
+    </el-menu-item>
+  </el-menu>
+</el-col>
+
+
+      <el-col :span="5">
         <el-menu :router=true menu-trigger="click" mode="horizontal" active-text-color="rgb(255, 255, 255)"  text-color="rgb(255, 255, 255)"
         background-color="rgb(25, 71, 41)">
 
@@ -60,6 +78,7 @@ nn<template>
 </template>
 
 <script>
+  import {searchArticle} from "../api/article";
   export default {
     name: 'BaseHeader',
     props: {
@@ -70,7 +89,10 @@ nn<template>
       }
     },
     data() {
-      return {}
+      return {
+        search:'',
+        articles:[]
+      }
     },
     computed: {
       user() {
@@ -91,6 +113,23 @@ nn<template>
             that.$message({message: error, type: 'error', showClose: true});
           }
         })
+      },
+      querySearchAsync(queryString, cb){
+        searchArticle(this.search).then((res)=>{
+          if (res.success){
+            var results = [];
+            for (const item of res.data){
+              results.push({
+                id:item.id,
+                value:item.title
+              });
+            }
+            cb(results)
+          }
+        })
+      },
+      handleSelect(item){
+        this.$router.push({path: '/view/'+item.id})
       }
     }
   }
@@ -104,7 +143,7 @@ nn<template>
     min-width: 100%;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
     background-color:  rgb(25, 71, 41);
- color:rgb(25, 71, 41);
+    color:rgb(25, 71, 41);
 
   }
 

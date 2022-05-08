@@ -6,7 +6,7 @@
         <el-tabs v-model="activeName">
 
 
-          <el-tab-pane label="小镇文章分类" name="category">
+        <el-tab-pane label="小镇文章分类" name="category">
             <ul class="me-allct-items">
               <li v-for="c in categorys" @click="view(c.id)" :key="c.id" class="me-allct-item">
                 <div class="me-allct-content">
@@ -22,7 +22,7 @@
                 </div>
               </li>
             </ul>
-          </el-tab-pane>
+        </el-tab-pane>
 
 
           <el-tab-pane label="小镇标签" name="tag">

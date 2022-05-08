@@ -1,7 +1,7 @@
-<!--<template>
+<template>
   <el-card :body-style="{ padding: '8px 18px' }">
-    <div slot="header" class="me-category-header">
-      <span style = "color: #006400;  ">{{cardHeader}}</span>
+    <div slot="header"class="me-category-header">
+      <span  >{{cardHeader}}</span>
     </div>
 
     <ul class="me-category-list">
@@ -49,7 +49,7 @@
   .me-category-item {
     padding: 4px;
     font-size: 14px;
-    color: #5FB878;
+    color:rgb(0,0,0);
   }
 
   .me-category-item a:hover {

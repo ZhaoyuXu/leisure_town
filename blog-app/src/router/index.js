@@ -39,6 +39,10 @@ const router = new VueRouter({
           component: r => require.ensure([], () => r(require('@/views/Index')), 'index')
         },
         {
+          path: '/search',
+          component: r => require.ensure([], () => r(require('@/views/BaseHeader')), 'search')
+        },
+        {
           path: '/log',
           component: r => require.ensure([], () => r(require('@/views/Log')), 'log')
         },

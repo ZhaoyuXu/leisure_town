@@ -4,9 +4,15 @@
 
       <a @click="view(id)" class="me-article-title">{{title}}</a>
       <el-button v-if="weight > 0" class="me-article-icon" type="text">置顶</el-button>
+
+      <span class="me-pull-right me-article-count">
+      	<i class="me-icon-comment"></i>&nbsp;评论 {{commentCounts}}
+      </span>
+
       <span class="me-pull-right me-article-count">
 	    	<i class="el-icon-view"></i>&nbsp;阅读次数 {{viewCounts}}
 	    </span>
+
     </div>
 
     <div class="me-artile-description">
@@ -35,6 +41,7 @@
     props: {
       id: String,
       weight: Number,
+      commentCounts: Number,
       title: String,
       viewCounts: Number,
       summary: String,

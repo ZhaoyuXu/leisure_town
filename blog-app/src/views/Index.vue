@@ -14,7 +14,7 @@
 
         <card-tag :tags="hotTags"></card-tag>
 
-        <card-article cardHeader="最热小镇标签" :articles="hotArticles"></card-article>
+        <card-article cardHeader="最热小镇文章" :articles="hotArticles" style = "color:rgb(25, 71, 41)"></card-article>
 
     <!--    <card-archive cardHeader="文章归档" :archives="archives"></card-archive>-->
 
@@ -61,9 +61,9 @@
          getHotArtices().then(data => {
            that.hotArticles = data.data
          }).catch(error => {
-       /*    if (error !== 'error') {
-             that.$message({type: 'error', message: '最热文章加载失败!', showClose: true})
-           }*/
+         if (error !== 'error') {
+             that.$message({type: 'error', message: '最热小镇文章加载失败!', showClose: true})
+           }
 
          })
 
