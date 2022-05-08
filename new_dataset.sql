@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: localhost    Database: new_schema2
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -49,7 +49,7 @@ CREATE TABLE `ms_article` (
 
 LOCK TABLES `ms_article` WRITE;
 /*!40000 ALTER TABLE `ms_article` DISABLE KEYS */;
-INSERT INTO `ms_article` VALUES (1001,0,1649751219622,'Stories about Jay Chou.','Jay Chou',6,0,1,1001,4),(1002,0,1649675043532,'Travel to Paris.','Eiffel Tower',17,0,3,1002,5),(1003,0,1649751024172,'Delicious Pizza!!!','Pizza',4,0,3,1003,1),(1004,0,1649751113782,'MOBA!','League Of Legends',5,0,3,1004,2),(1005,1,1649751124172,'Know more about Taylor Swift.','Taylar Swift',5,0,1,1005,4),(1516084926579511297,0,1650297788662,'Introduction about DC heroes','Hero',1,0,1515966632388263938,1516084926642425858,4);
+INSERT INTO `ms_article` VALUES (1001,0,1649751219622,'Stories about Jay Chou.','Jay Chou',6,0,1,1001,4),(1002,0,1649675043532,'Travel to Paris.','Eiffel Tower',17,0,3,1002,5),(1003,0,1649751024172,'Delicious Pizza!!!','Pizza',4,0,3,1003,1),(1004,0,1649751113782,'MOBA!','League Of Legends',5,0,3,1004,2),(1005,1,1649751124172,'Know more about Taylor Swift.','Taylar Swift',5,0,1,1005,4),(1516084926579511297,0,1650297788662,'Introduction about DC heroes','Hero',15,0,1515966632388263938,1516084926642425858,4);
 /*!40000 ALTER TABLE `ms_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `ms_category` (
 
 LOCK TABLES `ms_category` WRITE;
 /*!40000 ALTER TABLE `ms_category` DISABLE KEYS */;
-INSERT INTO `ms_category` VALUES (1,'/static/category/front.png','Cooking','Share knowledge about food.'),(2,'/static/category/back.png','Sport','All kinds of sports.'),(3,'/static/category/lift.jpg','Life','Share the good things in your life.'),(4,'/static/category/database.png','Art','Art comes from life.'),(5,'/static/category/language.png','Travel','Find a good place to travel');
+INSERT INTO `ms_category` VALUES (1,'/static/category/cooking.jpg','Cooking','Share knowledge about food.'),(2,'/static/category/sport.jpg','Sport','All kinds of sports.'),(3,'/static/category/life.jpg','Life','Share the good things in your life.'),(4,'/static/category/art.jpg','Art','Art comes from life.'),(5,'/static/category/travel.jpg','Travel','Find a good place to travel.');
 /*!40000 ALTER TABLE `ms_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `ms_comment` (
   KEY `Author` (`author_id`) USING BTREE,
   CONSTRAINT `Article` FOREIGN KEY (`article_id`) REFERENCES `ms_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `Author` FOREIGN KEY (`author_id`) REFERENCES `ms_sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1515967355528216578 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1517464149080764418 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `ms_comment` (
 
 LOCK TABLES `ms_comment` WRITE;
 /*!40000 ALTER TABLE `ms_comment` DISABLE KEYS */;
-INSERT INTO `ms_comment` VALUES (1513791493829603329,'asdawd',1649750991670,1002,3,0,0,'1'),(1515967355528216577,'good',1650269757525,1002,1515966632388263938,1513791493829603329,3,'2');
+INSERT INTO `ms_comment` VALUES (1513791493829603329,'asdawd',1649750991670,1002,3,0,0,'1'),(1515967355528216577,'good',1650269757525,1002,1515966632388263938,1513791493829603329,3,'2'),(1517464109868216322,'hao',1650626611567,1516084926579511297,1515966632388263938,0,0,'1'),(1517464149080764417,'hao',1650626620930,1516084926579511297,1515966632388263938,1517464109868216322,1515966632388264000,'2');
 /*!40000 ALTER TABLE `ms_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,16 +282,16 @@ CREATE TABLE `ms_tag` (
 
 LOCK TABLES `ms_tag` WRITE;
 /*!40000 ALTER TABLE `ms_tag` DISABLE KEYS */;
-INSERT INTO `ms_tag` VALUES (1,'/static/tag/java.png','Food'),(2,'/static/tag/java.png','Recipe'),(3,'/static/tag/java.png','E-sports'),(4,'/static/tag/css.png','Ball game'),(5,NULL,'Athletics'),(6,NULL,'Other sports'),(7,NULL,'Daily life'),(8,NULL,'OOTD'),(9,NULL,'Music'),(10,NULL,'Fine arts'),(11,NULL,'Artist'),(12,NULL,'Tourist attraction'),(13,NULL,'Travel strategy'),(14,NULL,'Scenic spot introduction'),(15,NULL,'Moive');
+INSERT INTO `ms_tag` VALUES (1,'/static/tag/food.jpg','Food'),(2,'/static/tag/recipe.jpg','Recipe'),(3,'/static/tag/e-sports.jpg','E-sports'),(4,'/static/tag/ball game.jpg','Ball game'),(5,'/static/tag/athletics.jpg','Athletics'),(6,'/static/tag/other sports.jpg','Other sports'),(7,'/static/tag/daily life.jpg','Daily life'),(8,'/static/tag/ootd.jpg','OOTD'),(9,'/static/tag/music.jpg','Music'),(10,'/static/tag/fine arts.jpg','Fine arts'),(11,'/static/tag/artist.jpg','Artist'),(12,'/static/tag/tourist attraction.jpg','Tourist attraction'),(13,'/static/tag/travel strategy.jpg','Travel strategy'),(14,'/static/tag/scenic spot introduction.jpg','Scenic spot introduction'),(15,'/static/tag/movie.jpg','Movie');
 /*!40000 ALTER TABLE `ms_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'new_schema'
+-- Dumping events for database 'new_schema2'
 --
 
 --
--- Dumping routines for database 'new_schema'
+-- Dumping routines for database 'new_schema2'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -303,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-19  0:05:55
+-- Dump completed on 2022-04-29 23:30:35
