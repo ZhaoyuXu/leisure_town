@@ -42,6 +42,15 @@ public class CategoryServiceImpl implements CategoryService {
         return Result.success(copyList(categories));
     }
 
+    //search the information of categories
+    @Override
+    public Result categoryDetailById(Long id) {
+        Category category = categoryMapper.selectById(id);
+        //转换为category VO实例
+        CategoryVo categoryVo = copy(category);
+        return Result.success(categoryVo);
+    }
+
     public CategoryVo copy(Category category){
         CategoryVo categoryVo = new CategoryVo();
         BeanUtils.copyProperties(category,categoryVo);

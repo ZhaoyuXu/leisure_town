@@ -61,6 +61,12 @@ public class TagsServiceImpl implements TagsService {
     }
 
     @Override
+    public Result findDetailById(Long id) {
+        Tag tag = tagMapper.selectById(id);
+        return Result.success(copy(tag));
+    }
+
+    @Override
     public Result hots(int limit) {
         List<Long> tagIds = tagMapper.findHotsTagIds(limit);
         //因为id in（1,2,3） 里面不能为空所以我们需要进行判断

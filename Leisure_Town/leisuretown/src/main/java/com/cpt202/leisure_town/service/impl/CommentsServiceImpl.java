@@ -1,7 +1,11 @@
 package com.cpt202.leisure_town.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.cpt202.leisure_town.dao.mapper.ArticleMapper;
 import com.cpt202.leisure_town.dao.mapper.CommentMapper;
+import com.cpt202.leisure_town.dao.pojo.Article;
 import com.cpt202.leisure_town.dao.pojo.Comment;
 import com.cpt202.leisure_town.dao.pojo.SysUser;
 import com.cpt202.leisure_town.service.CommentsService;
@@ -11,6 +15,7 @@ import com.cpt202.leisure_town.vo.CommentVo;
 import com.cpt202.leisure_town.vo.Result;
 import com.cpt202.leisure_town.vo.UserVo;
 import com.cpt202.leisure_town.vo.params.CommentParam;
+import org.apache.catalina.Wrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +31,8 @@ public class CommentsServiceImpl implements CommentsService {
     private CommentMapper commentMapper;
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private ArticleMapper articleMapper;
 
     @Override
     public Result commentsByArticleId(Long id) {
@@ -57,7 +64,13 @@ public class CommentsServiceImpl implements CommentsService {
         Long toUserId = commentParam.getToUserId();
         comment.setToUid(toUserId == null ? 0 : toUserId);
         this.commentMapper.insert(comment);
-        return Result.success(null);
+        UpdateWrapper<Article> updateWrapper = Wrappers.update();
+        updateWrapper.eq("id", comment.getArticleId());
+        updateWrapper.setSql(true, "comment_counts=comment_counts+1");
+        this.articleMapper.update(null, updateWrapper);
+
+        CommentVo commentVo = copy(comment);
+        return Result.success(commentVo);
 
     }
 
