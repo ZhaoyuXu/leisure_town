@@ -24,7 +24,7 @@ public class ArticleController {
         //ArticleVo 页面接收的数据
         return articleService.listArticlesPage(pageParams);
 //
-//        return Result.success(articles);
+//        return Result.success(articles) ;
     }
 
     @PostMapping("hot")
